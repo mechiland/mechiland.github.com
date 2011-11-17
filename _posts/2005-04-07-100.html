@@ -1,0 +1,58 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "应用Ant生成Web站点"
+---
+我终于开始编写buffalo的站点了。很早以前我就尝试过<a href="http://forrest.apache.org/">Apache Forrest</a>，但是它千篇一律的界面让我烦透了，看看他的templates, 想要自定义也估计够麻烦。于是就开始想直接手写页面。手写页面本来也没有什么问题，主要是页面头、菜单、脚标等重复部分，比较难以同步；如果采用javascript document.write来写，页面又不利于保存。想来想去，于是想起了Ant里面有一个Replace 的任务。看了看，完成简单的站点更新看来是没有什么问题了。
+
+    <target name="site" depends="init">
+		<loadfile property="header" srcFile="slice/header.html" />
+		<loadfile property="footer" srcFile="slice/footer.html" />
+		<loadfile property="menu" srcFile="slice/menu.html" />
+		<loadfile property="meta" srcFile="slice/meta.html" />
+		
+		<copy todir="${site.dir}" overwrite="true">
+			<fileset dir="${pages.dir}">
+				<include name="*.*" />
+			</fileset>
+		</copy>
+
+		<replace dir="${site.dir}" token="@HEADER@" value="${header}"/>
+		<replace dir="${site.dir}" token="@MENU@" value="${menu}"/>
+		<replace dir="${site.dir}" token="@FOOTER@" value="${footer}"/>
+		<replace dir="${site.dir}" token="@META@" value="${meta}"/>
+	</target>
+
+上面的ant 脚本能够从4个文件中读取头，菜单，脚标以及原数据信息，将这些替换到相应的页面中，真正包含数据的页面可以非常简单：
+
+	<html>
+	<head>
+	<title>Buffalo</title>
+	@META@
+	</head>
+
+	<body>
+	@HEADER@
+	<div id="contentBody">
+		<table width="100%" border="0" cellpadding="0" cellspaceing="0">
+	  <tr>
+		<td valign="top" id="menu">
+		@MENU@
+		</td>
+		<td valign="top" id="content">
+		演示, 正在编写呢.
+		</td>
+	  </tr>
+	</table>
+	</div>
+	@FOOTER@
+	</body>
+	</html>
+
+呶，我打算这样来构建BuffaloWebRemoting的介绍站点。
+
+Btw，在如何对buffalo客户端javascript api进行文档编写，我也头痛了一段时间，无意中想起了<a href="http://jsdoc.sourceforge.net">jsdoc</a>这个东西，它采用跟javadoc同样的注释标记，对源代码中的注释进行文档生成。下载下来对buffalo.js和buffalo-bind.js进行了生成文档，生成的文档质量很不错，看起来跟javadoc很像。
+
+Buffalo的logo大概出来了：<img src='/wp-content/buffalogif.gif' alt='buffalo logo' />

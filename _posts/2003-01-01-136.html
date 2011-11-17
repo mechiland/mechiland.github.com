@@ -1,0 +1,26 @@
+--- 
+layout: post
+status: draft
+type: post
+published: false
+title: "SonicASP Framework"
+---
+想到ASP，大家可能想到的就是简单的功能堆砌。在J2EE领域不断思索之后，我终于总结出了这样一种面向模板的ASP开发框架，这种框架能够完全将表示与逻辑彻底分离，提供大量基础机制，以便于快速开发。目前包括以下功能组件：
+
+* AdoTemplate <br />
+还在担心SQL注入？还在将创建connection, 编写sql, 处理adodb.resultset作为工作的一部分？AdoTemplate完全封装了这些，甚至对数据分页也进行了封装。采用AdoTemplate，以前需要编写数十条复杂的sql语句，现在只需要一两句即可。
+
+* 基于模板的ASP引擎<br />
+很羡慕JSP中JSTL的处理吧？而asp中无论如何都需要加入丑陋的< %%>来实现业务逻辑。现在不需要了。采用JSTemplate的模板引擎，将ASP开发真正隔离为界面开发与逻辑开发。
+
+* 新型页面流程管理<br />
+页面路径不需要暴露在浏览器中，通过一个新的配置文件，客户在浏览器中甚至只看见一个地址。MVC的设计思路在ASP中得到了实现！
+
+* Buffalo Remoting<br />
+没错，BuffaloRemoting服务器端在ASP中也实现了！
+
+* 基础设施<br />
+数据连接池的管理，页面缓存的处理，数据分页缓存的处理，文件上传，request参数处理，cookie,session,application各种参数的处理，邮件发送，这些基础功能都已经完全得到了实现。你要做的只是简单调用而已！
+
+
+SonicASP Develop Framework能够彻底颠覆以往的ASP开发流程，真正提高开发效率！

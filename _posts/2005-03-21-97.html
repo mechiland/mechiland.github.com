@@ -1,0 +1,21 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "Buffalo - 一个amowa的基础设施"
+---
+早上的时候，新添了一些代码，使Buffalo看起来稍微完整了一些。关于面向异步消息的web应用，我终于做出了一些实用性的东西——实际上，从去年2月开始，当我编写livechat版本1, 哦，确切的说是在03年底编写数据分析软件web客户端的时候，我就开始做这方面的思考与探索。livechat2.0的完成，使我在面向消息方面的应用方面大跨了一步；然而面向消息并不完整，当我试图完成buffalo原始版本，打算封装消息类型，并按照消息类型服务器端调用相应命令的时候，在数据序列化/反序列化上变得无趣。我坚信一定有更好的实现的——尽管我在Amowa的定义文档中指出xmlrpc可能是消息封装的一种方式，但是xmlrpc本身太琐碎了，而且java实现对数据类型的支持太有限。直到我春节期间发现Burlap, 这个优雅而轻量级的传输协议。
+
+Bufffalo现在的版本包括两部分：面向服务器端的BuffaloService和面向客户端的buffalo.js,  服务器端现在能够跟Spring进行集成，使得任意的service暴露为Buffalo服务成为可能；客户端实现了Burlap协议，并能够调用任意服务器端的Buffalo服务，并将返回值包装为JS对象。Buffalo与其它WebRemoting方案的最大不同在于，它能够将服务器端的返回值——任意类型，没错，任意类型，包装为JavaScript对象。不仅仅是对象，对于返回值中存在对象引用关系，Buffalo也能够很好的处理，决不会造成内存泄露。例如，一个包含3个元素的循环链表，Buffalo能够很好的处理这种关系。
+
+一个典型的调用方式如下：<br />
+Buffalo.remoteCall2("commonService", ["sum", 1,1], callback);<br />
+
+这中调用方式还是有些粗糙。Buffalo Binding组件将amowa的概念实现的更远。它允许直接将远程调用的结果绑定到HTML元素上，这一过程将是透明的，开发者无需关心内部实现。目前已经实现将结果绑定到input text,password, checkbox, radiobutton, 下拉列表，表格。这一切的绑定调用，甚至只需要一句话：
+
+Buffalo.bindReply("commonService", ["now"], "timeInput");
+
+上面这句话将会调用远程的now方法，并将结果绑定到id为timeInput的控件上。
+
+Buffalo将会走得更远，为Amowa做更多的工作。我期待的是有一天，这头大水牛能够自动辨认HTML元素中的bid属性，并自动将远程服务的操作结果绑定到html控件上，成为一个不需要java端编程的新型web框架。

@@ -1,0 +1,16 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "NoClassDefError - 留意编译环境与运行环境JDK是否一致"
+---
+又是一个IBM JDK的问题：一段代码，其中包含了静态加载的部分代码：
+
+    static {
+        loadProperties("/Abc.txt");
+    }
+
+编译完成后部署在WebSphere 5.1上，结果发现这段代码出现NoClassDefError错误。仔细检查代码后，发现WSAD中，项目在Sun JDK1.4环境下编译，而运行在IBMJDK1.4环境下。将代码重新在Webspehre自带的JDK下编译并重新部署，问题解决。
+
+看来各个厂商实现的不同的JDK二进制代码并不一致，IBM JDK就是一个例子。我记得JDOM0.9版本不支持websphere, 以前一位同事在将JBossCache引入项目的时候，都被这个问题折磨的死去活来。现在看来，问题解决的办法就比较简单了，找到代码重新编译打包就行了。

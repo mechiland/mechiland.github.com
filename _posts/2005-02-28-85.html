@@ -1,0 +1,42 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "WEB(Javascript)远程调用方案清单"
+---
+WEB(Javascript)远程调用方案清单
+
+Web远程过程调用（以下简称WebRPC）是在不刷新页面的前提下，对远程方法进行调用，是最近的一个热点；在一些场合下，他甚至成为不可替代的实现方式。WebRPC的实现方式经历了从普通URL读取，隐藏帧，IFrame, XMLHTTP乃至 Flash等。本文将对目前存在的WebRpc方案（产品）进行列表，并作简单评价。
+
+评价将在以下几个方面进行：客户端实现方式，服务器端实现方式，是否自行封装协议，是否支持序列化/反序列化，序列化支持是否完备（原子类型，对象类型），是否支持异步/同步方式。注意，由于Web方式的远程调用没有得到大规模运用。笔者自己并没有在企业应用中采用WebRPC的经验，但在娱乐应用、在线游戏中，已经得到了相当好的运用。这些应用已经在《面向异步消息的Web应用(AMOWA)》中得到详细论述，有兴趣的可以在产品指南栏目中阅读这篇文章。
+
+1 MSRS (Microsoft Remote Scripting)
+地址：http://msdn.microsoft.com/library/default.asp?url=/library/en-us/rmscpt/Html/rmscpt1.asp
+简介：在网页出现的早期，浏览器功能有限。Applet的出现，为MSRS提供了平台。在这项方案中，MSRS通过一个applet类以及页面上的参数配置，来与服务器端交互，从而实现了远程调用。采用此项技术实际上将页面不刷新的工作交给了一个名为rsproxy.class的不可见Applet完成。我见过早期的在线Web象棋采用此项方案。优点：轻而易举跨浏览器；缺点：服务器端采用微软asp, applet加载缓慢；不支持数据类型序列化/反序列化。
+
+2 JSRS (Javascript Remote Scripting)
+地址：http://www.blueshoes.org/en/javascript/jsrs/
+简介：支持两种数据访问方式：HTTP GET方式（动态加载JS文件），HTTP POST方式（用JS动态创建一个Iframe, 在其中提交一个表单）。不用刷新页面，支持简单数据的序列化/反序列化。
+
+3 XML-RPC
+地址：http://www.xmlrpc.org/
+简介：XML-RPC定义了一种协议规范，由于它的轻量级、概念完整，因此目前绝大多数语言都有实现，包括Java（Apache xml-rpc）, PHP, javascript, VBScript, python等等。最大的交流方式Blog协议，管理方法也遵循XML-RPC规范。优点：绝大多数语言都支持，简单，规范。缺点：Java实现对数据类型序列化支持有限
+
+4 dwr (Direct Web Remoting)
+地址：https://dwr.dev.java.net/
+简介：一个在适当时候提出适当概念的小东西。采用xmlhttp传递请求，服务器端利用反射找到相应方法执行后将结果返回。较有创意的是，他将服务器端需要进行远程调用的代码动态转换为相应的js代码，前端可以直接显式调用。简单，可以作为WebRPC学习入门。不支持数据序列化
+
+5 JSON-RPC
+地址：http://oss.metaparadigm.com/jsonrpc/
+简介：采用一种没听说过的数据交换协议JSON(JavaScript Object Notation, http://www.crockford.com/JSON/) 作为协议基础，在此之上进行数据调用，采用xmlhttp发送/接受请求，支持完整的数据序列化/反序列。目前，jason Web框架采用json-rpc为底层方式。
+
+6 Burlap (http://caucho.com/burlap/index.xtp)
+简介：也许会奇怪，为什么Burlap也能够算得上远程协议。实际上，与Hessian实现方式基本相同的Burlap（前者为二进制，后者为文本）, 在协议完整性上能够超过上述任一产品。目前我已经实现了JS调用Burlap服务的代码，是目前所有远程调用方式中最为优雅的实现。
+
+7 XINS (XML Interface for Network Services)
+地址：http://xins.sourceforge.net/index.html
+简介：按照官方网站的说法，SOA + Java + XML + code_generation - complexity => XINS。这个庞大的东西需要定义一揽子描述文件然后才能在HTML中进行调用。从外观上看，这是最像样子的解决方案。对其了解不多，不做评价。
+
+8 WebService, SOAP
+简介：除了微软有一个webservice.htc控件，mozilla也有相应的webservice访问方式。因此，在HTML中访问webservice也是可行的。只是这种协议过于笨重，除非必要，没有人会在web客户端中使用。

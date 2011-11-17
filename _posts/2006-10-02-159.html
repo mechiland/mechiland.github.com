@@ -1,0 +1,12 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "Buffalo 2 vs Buffalo 1: +30% performance"
+---
+<img src="http://lh3.google.com/mechiland/RR_vqYNWABI/AAAAAAAAAUQ/logNQGECuRQ/benchmark.jpg" alt="buffalo benchmark" />
+
+说明：测试机器配置：笔记本Pentium M 2.0G, 2G内存。第一列是循环调用次数；Request / Second是每秒能够处理的请求数（吞吐量）。由于新的实现加入了众多缓存，因此在小数量调用时不能体现优势，但真正在高并发请求的场景中，2要比1.2提高30%的性能。在运行Demo应用时，明显感觉速度有所提高
+
+buffalo2.0的发布时间还没有确定，需要试验的请通过<a href="https://buffalo.dev.java.net">cvs</a>获取。另外，我很想与DWR的处理速度进行一个对比，但仔细看了DWR代码，代码写的与servlet api太紧，很难单独抽出来进行测试。哪位有相关数据的请给我帮助。

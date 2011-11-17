@@ -1,0 +1,245 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "使用buffalo作为webwork的验证机制-实现"
+---
+要的人比较多，废话少说，放代码：
+
+ValidationError.java, 主要是错误信息的一个DTO
+[java]
+public class ValidationError {
+	private String name;
+	private String value;
+	
+	public ValidationError() {
+		
+	}
+	
+	public ValidationError(String name, String value) {
+		this.name = name;
+		this.value = value;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getValue() {
+		return value;
+	}
+	public void setValue(String value) {
+		this.value = value;
+	}
+	
+}
+[/java]
+
+ValidationService.java, buffalo要使用的service, 代码不复杂，没有注释，原理见<a href="http://michael.nona.name/archives/123">前一篇文章</a>
+[java]
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import com.opensymphony.xwork.Action;
+import com.opensymphony.xwork.ActionContext;
+import com.opensymphony.xwork.ActionProxy;
+import com.opensymphony.xwork.DefaultActionInvocation;
+import com.opensymphony.xwork.DefaultActionProxy;
+import com.opensymphony.xwork.ValidationAware;
+import com.opensymphony.xwork.config.entities.ActionConfig;
+public class ValidationService {
+	public List validate(String namespace, String action, Map parameters) {
+		List errorList = new ArrayList();
+		Action requestedAction = null;
+		HashMap ctx = new HashMap();
+		ctx.put(ActionContext.PARAMETERS, parameters);
+		ValidatorActionProxy proxy;
+		try {
+			proxy = new ValidatorActionProxy(namespace, action, ctx);
+			proxy.execute();
+			requestedAction = proxy.getAction();
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			return null;
+		}
+
+		if (requestedAction instanceof ValidationAware) {
+			ValidationAware va = (ValidationAware) requestedAction;
+			Map fe = va.getFieldErrors();
+			for (Iterator iterator = fe.entrySet().iterator(); iterator
+					.hasNext();) {
+				Map.Entry entry = (Map.Entry) iterator.next();
+				String name = (String) entry.getKey();
+				List errors = (List) entry.getValue();
+				for (Iterator iterator1 = errors.iterator(); iterator1
+						.hasNext();) {
+					String error = (String) iterator1.next();
+					errorList.add(new ValidationError(name, error));
+				}
+			}
+		}
+
+		return errorList;
+
+	}
+
+	public static class ValidatorActionInvocation extends
+			DefaultActionInvocation {
+		protected ValidatorActionInvocation(ActionProxy proxy, Map extraContext)
+				throws Exception {
+			super(proxy, extraContext, true);
+		}
+
+		protected String invokeAction(Action action, ActionConfig actionConfig)
+				throws Exception {
+			return Action.NONE; // don't actually execute the action
+		}
+	}
+
+	public static class ValidatorActionProxy extends DefaultActionProxy {
+		protected ValidatorActionProxy(String namespace, 
+				String actionName,
+				Map extraContext) throws Exception {
+			super(namespace, actionName, extraContext, false);
+		}
+
+		protected void prepare() throws Exception {
+			invocation = new ValidatorActionInvocation(this, extraContext);
+		}
+	}
+}
+[/java]
+
+buffalo-service.properties
+[txt]
+validationService=your.package.ValidationService
+[/txt]
+
+更改webwork模板中的simple/form.vm:
+[html]
+<form onsubmit="return validate(this);" ...
+[/html]
+
+最后，加入一个validate.js。用的是buffalo 1.1版本（写的时候的版本）。
+[javascript]
+var currentForm = null;
+
+var getContextPath = function() {
+	var ctxPath = "";
+    $A(document.getElementsByTagName("script")).findAll( function(s) {
+      return (s.src && s.src.match(/buffalo\.js(\?.*)?$/))
+    }).each( function(s) {
+      var path = s.src.replace(/script\/buffalo\.js(\?.*)?$/,'');
+	  ctxPath = path;
+    });
+
+	return ctxPath;
+}
+
+function validate(theForm) {
+	var buffaloURL = getContextPath()+"BUFFALO";
+	var buffalo = new Buffalo(buffaloURL);
+	buffalo.events["onLoading"] = function() {}
+	var parameters  = {};
+	for (var i = 0; i < theForm.elements.length; i++) {
+        var e = theForm.elements[i];
+        parameters[e.name] = e.value;
+    }
+    currentForm = theForm;
+    var actionName = theForm.name;
+    if (actionName.indexOf("do") != 0) {
+	    actionName = "do"+actionName.charAt(0).toUpperCase() + actionName.substring(1);
+	}
+	Form.disable(theForm.id);
+    buffalo.remoteCall("validationService.validate", 
+    	[theForm.getAttribute("namespace"), actionName, parameters], callback) ;
+    return false;
+}
+
+function callback(reply) {
+	Form.enable(currentForm.id);
+	var insideTable = currentForm.getElementsByTagName("TABLE")[0];
+	clearErrorRows(insideTable);
+	clearErrorLabels(currentForm);
+	var errors = reply.getResult();
+	if (errors == null) {alert(null); return; }
+	if (errors.length > 0) {
+		for (var i = 0; i < errors.length; i++) {
+			var error = errors[i];
+			var element = currentForm.elements[error.name];
+                addError(element, error.value);
+		}
+		
+	} else {
+		currentForm.submit();
+		Form.disable(currentForm.id);
+	}
+}
+
+function clearErrorRows(table) {
+    // clear out any rows with an "errorFor" attribute
+    var rows = table.rows;
+    var rowsToDelete = new Array();
+    for(var i = 0; i < rows.length; i++) {
+        var r = rows[i];
+        if (r.getAttribute("errorFor")) {
+            rowsToDelete.push(r);
+        }
+    }
+
+    // now delete the rows
+    for (var i = 0; i < rowsToDelete.length; i++) {
+        var r = rowsToDelete[i];
+        table.deleteRow(r.rowIndex);
+    }
+}
+
+function clearErrorLabels(form) {
+    // set all labels back to the normal class
+    var elements = form.elements;
+    for (var i = 0; i < elements.length; i++) {
+        var e = elements[i];
+        var cells = e.parentNode.parentNode.cells;
+        if (cells && cells.length >= 2) {
+            var label = cells[0].getElementsByTagName("label")[0];
+            if (label) {
+                label.setAttribute("class", "label");
+            }
+        }
+    }
+
+}
+function addError(e, errorText) {
+    try {
+        var row = e.parentNode.parentNode;
+        var table = row.parentNode;
+        var error = document.createTextNode(errorText);
+        var tr = document.createElement("tr");
+        var td = document.createElement("td");
+        var span = document.createElement("span");
+        td.align = "center";
+        td.valign = "top";
+        td.colSpan = 2;
+        span.className="errorMessage";
+        span.appendChild(error);
+        td.appendChild(span);
+        tr.appendChild(td);
+        tr.setAttribute("errorFor", e.id);;
+        table.insertBefore(tr, row);
+        var label = row.cells[0].getElementsByTagName("label")[0];
+        label.setAttribute("class", "errorLabel");
+    } catch (e) {
+        alert(e);
+    }
+}
+[/javascript]
+
+调用流程：实际上表单提交前buffalo将整个表单送到了后台并利用ValidationService执行了一次action，看有没有错误，如果没有错误才真正提交，否则通过js对页面进行相应的提示。
+
+注意事项：1, 一些拦截器需要ActionContext中含有servlet等信息，由于ValidationService不带有这些信息，因此这些拦截器可能会在校验的时候报错；2, webwork的某些校验器的错误提示信息有些并不返回，因此不是所有的校验错误都能返回，但绝大多数都能满足了；3, 不要期待你写的actionError信息也能通过这种方式返回——当然你可以自己写，但在这个实现中，只能返回校验错误信息.</form>

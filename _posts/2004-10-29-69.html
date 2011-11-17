@@ -1,0 +1,8 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "连接DB2的问题--encoding not supported"
+---
+<p>Driver: com.ibm.db2.jcc.DB2Driver</p> <p>用Squirrel SQL查看db2的数据结构，填好driver, url, username, password后，点“connect”，出现问题：</p> <p><font color="#ff1493">com.ibm.db2.jcc.b.DisconnectException: encoding not supported!!</font></p> <p>奇怪，怎么会出现这个错误？我以为是SquirrelSQL的问题，运行了一下自己以前写的一个代码生成器，输入相同的参数，发现还是出现这个问题……头痛，以为是通过Console输入的参数编码与通过Java文件输入的编码不一致，索性打开Eclipse, Class.forName，然后getConnection，问题同样。</p> <p>同事把代码拿去，在WSAD下面重新编译运行，奇怪，没问题；我也在WSAD下面重新编译运行了一次，居然也没有问题。</p> <p>问题很明显了，是那该死的IBM JDK. 把Squirrel SQL运行的Java_home设置为WSAD的jre_home，问题果然解决，db2数据库结构正常显示在面前。</p> <p>虽然问题解决，我还是不知道为什么——我也不想知道。记得以前jdom在webshpere上不能正常运行就把我弄得死去活来，这次又耗掉了我1个小时。IBM的jvm真是诡异。</p>

@@ -1,0 +1,16 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "开源项目OpenBUGZ启动，采用Tapestry作为前端展现框架"
+---
+<p>我几乎是和gigix一起学习Tapestry的。那时候学习的人并不多。不过当时gigix了解的东西比我要多很多（现在也是），比如Blog，比如Hibernate。去年吧，写了篇Tapestry入门级的文章后，便转向了数据分析、商业智能方面的研究。以后对Tapestry就没有接触了。</p>
+<p>半个月前决定开启一个新的开源项目，目的首先是做成一个成型能用的产品，至少供自己部门使用；二是验证我对AOP, IoC的思考结果，三是表现J2EE的各种最佳实践，并争取能够形成某种开发模板，为以后的开发提供铺垫。刚开始本想采用appfuse的方式，Spring+Struts+Tiles+JSTL...看到这一连串的加号，我有点头晕。开发目的是为了简单，这么一个复杂的模型肯定很难说服其他人使用。Spring的使用是毫无疑问的，前台表现我想到了Tapestry，并最终选择了它。</p>
+<p>上周末之前我已经设计出了大部分的用例和模型类。在DomainObject和POJO+DAO的方式选择上，我采用了后者。原因是我对DomainObject还有些理解不清。DAO也被我简化了，直接就是Service层。这要得益于Spring提供的HibernateTemplate。就是这样Service层还是简单得要命，而且异常健壮。针对Service层的Hibernate实现，我做了大量的单元测试，结果令我满意。</p>
+<p>集成Tapestry的过程一波三折。按照Spring Reference中的步骤，死活无法初始化ApplicationContext。后来才恍然大悟的把ContextLoaderListener加入到web.xml才成功；对于如何在应用程序中取得ApplicationContext, 我尝试了两种方法：一是直接编写了新的BaseEngine和新的BasePage，在其中我添加了ApplicationContext的初始化和引用。这样我能从任何一个Page中取得context。这种方式是目前我采用的方式；二是将各种Page类受Spring托管，并将各种Service注入到Page中。考虑到复杂性（主要是麻烦），我没有这么做。后来阅读了Tapestry的User Manual, 便采用了更为灵活的方式，例子如下：</p>
+<p>public abstract SomePage extends MyBasePage {<br />&nbsp;&nbsp;&nbsp; public abstract UserManager getUserManager();<br />&nbsp;&nbsp; ...<br />}</p>
+<p>SomePage.page:</p>
+<p>&lt;property-specification name=&#8220;userManager&#8220; type=&#8220;openbugz.service.UserManager&#8220;&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; global.appContext.getBean(&#8220;userManager&#8220;)<br />&lt;/property-specification&gt;</p>
+<p>呵呵，真是自由而方便的实现！</p>
+<p>目前OpenBUGZ已经开始编码，中间过程可能会有不少问题，一个月内应该能够完成第一个版本。届时我会将源代码发布到cosoft，有兴趣参与项目并且对上述技术不太陌生的朋友，可以与我联系。</p>

@@ -1,0 +1,8 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "被FreeMarker气死了，${...}的问题"
+---
+<p>生成JSP一个很典型的问题：JSP中使用了JSTL的c:out标记：&lt;c:out value=${subject.name}&gt;，显然这个${...}是不应该被FreeMarker解析的。我用Velocity的方法想当然的改成了&lt;c:out value=\${subject.name}&gt;，不行；于是又改成了&lt;c:out value=$${subject.name}&gt;，依旧不行……郁闷。花了一个小时浏览了一遍Designer Guilde, Programmer Guilde, FAQ, Referrence，没有找到我想要的结果。生闷气。</p> <p>找到他的邮件列表，有人跟我有同样的问题：<a href="http://article.gmane.org/gmane.comp.web.freemarker.user/838">http://article.gmane.org/gmane.comp.web.freemarker.user/838</a>&nbsp;FreeMarker提供的方法居然是：将$换为%，然后用#replace指令或者?replace替换为'$'……馊主意，来气；继续往下看，果然提出这个问题的家伙狠狠批评了一顿："I think that's overstating the challenge considerably!" <a href="http://article.gmane.org/gmane.comp.web.freemarker.user/844">http://article.gmane.org/gmane.comp.web.freemarker.user/844</a>&nbsp;呵呵</p> <p>算了，有解决办法总比没有强，先将就吧。<br /></p>

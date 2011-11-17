@@ -1,0 +1,202 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "闲话：关于敏捷"
+---
+(10:09:50 PM) Stephen H. Wang: 好像很久没看到你上网了。:)
+(10:10:52 PM) Michael: 最近白天都不用电脑
+(10:10:58 PM) Michael: 工作原因
+(10:11:06 PM) Stephen H. Wang: 哦，不用电脑？太神气了。
+(10:11:11 PM) Stephen H. Wang: 神奇
+(10:11:22 PM) Stephen H. Wang: IT业居然不用电脑*-)
+(10:11:45 PM) Michael: 做咨询了...主要靠说话
+(10:11:59 PM) Stephen H. Wang: 我们领导明天准备给我们安排一个讲座：Refactoring - Martin Fowler的书。
+(10:12:04 PM) Michael: 哦
+(10:12:08 PM) Stephen H. Wang: 哦~~~~原来如此，好工作！
+(10:12:12 PM) Michael: 谁来讲
+(10:12:17 PM) Stephen H. Wang: 内部安排的。
+(10:12:28 PM) Stephen H. Wang: 可是就是这个领导，居然不认可你们公司的工作流程...
+(10:12:33 PM) Stephen H. Wang: 我只有无语了。
+(10:13:04 PM) Stephen H. Wang: 我第一次看这个书，说实在的，收获太大了。
+(10:13:20 PM) Stephen H. Wang: 越接触敏捷，越觉得你们公司厉害。
+(10:13:54 PM) Michael: 哈哈
+(10:14:00 PM) Stephen H. Wang: 越来越觉得ISO，CMMI那一套似乎说得好，行不通。 - 软件还是人写的。不是过程写的。
+(10:14:17 PM) Michael: 。。。
+(10:14:21 PM) Stephen H. Wang: 除非有无限的资源，否则，初级程序员写出的代码质量不高。
+(10:14:22 PM) Michael: 你不是现在才了解吧...
+(10:14:41 PM) Stephen H. Wang: 第一次接触敏捷的时候知道这个概念，但是现在是实践出真知。
+(10:15:06 PM) Stephen H. Wang: Daily Build, Night Release....
+(10:15:37 PM) Stephen H. Wang: 而采用瀑布式根本做不到，怎么应对市场变化。
+(10:16:00 PM) Stephen H. Wang: 不过，近期也有疑问，就是敏捷如何做测量。
+(10:16:21 PM) Stephen H. Wang: 怎么判定软件的质量好坏。例如，以前提到的千行代码缺陷率。
+(10:16:42 PM) Michael: 。。。
+(10:16:45 PM) Michael: 你自己觉得呢
+(10:16:51 PM) Stephen H. Wang: 不知道
+(10:16:54 PM) Stephen H. Wang: 所以才疑惑
+(10:16:57 PM) Michael: 我们的客户前一阶段就问了这个问题
+(10:17:12 PM) Michael: 我的回答是 -- 这就是一个扯蛋的指标
+(10:17:12 PM) Stephen H. Wang: 我想转型的时候都会有此一问。
+(10:17:24 PM) Michael: 当然没这么说...
+(10:17:27 PM) Stephen H. Wang: 那么，如何判定敏捷以后的质量呢？
+(10:17:38 PM) Michael: 按照Story来
+(10:17:46 PM) Stephen H. Wang: 是因为自动测试 - All passed 所以就是质量过关了吗？
+(10:17:47 PM) Michael: 每个Story的缺陷数量
+(10:18:00 PM) Stephen H. Wang: 可是，每天一个发布，如何统计缺陷数量？
+(10:18:22 PM) Michael: 你要想到  缺陷率是典型的后置式检查
+(10:18:32 PM) Stephen H. Wang: 对！完全同意
+(10:18:37 PM) Michael: 而敏捷里面所有的实践，质量是隐含的，不可侵犯的
+(10:18:49 PM) Michael: 这就是我们所说的Built Quality In
+(10:19:09 PM) Stephen H. Wang: 嗯，这个概念的确是很好。
+(10:19:12 PM) Michael: 从项目的一开始，质量检测环节就贯穿始终
+(10:20:11 PM) Michael: 比如，刚开始写Story, 就要和测试人员定义验收条件；开发Story采用TDD的方式，通过测试来检验功能，类似于砌墙的时候先扯水平线，然后开始铺砖
+(10:20:27 PM) Stephen H. Wang: 嗯。
+(10:20:34 PM) Michael: 一般的敏捷项目，测试代码与开发代码的比例至少是1:1。我们的项目一般是2:1甚至3:1
+(10:20:50 PM) Michael: 千行代码缺陷率对于敏捷项目而言是个笑话
+(10:20:57 PM) Michael: 因为代码行数是个很扯淡的指标
+(10:21:16 PM) Stephen H. Wang: 呵呵，这个指标是针对以前的过程式开发而设立的。
+(10:21:20 PM) Michael: 分母都没意义，分子除以分母更没意义
+(10:21:50 PM) Michael: 比如说，你用2000行写了一个功能，发现了1个bug；我只用了20行，也发现了同样的bug. 是不是说你就比我厉害呢
+(10:22:07 PM) Stephen H. Wang: 同意。
+(10:22:49 PM) Stephen H. Wang: 可是 - 社会平均生产率这个词总还是能够说明一些问题的吧。
+(10:22:50 PM) Michael: 开发软件是一项艺术活动。代码行导向的指标完全将其视作计件工人。
+(10:23:13 PM) Stephen H. Wang: 是的，即使MS，也有Software Factory一说。
+(10:23:23 PM) Stephen H. Wang: 日企更是大行其道。
+(10:23:44 PM) Stephen H. Wang: 所以，有一个词：软件蓝领就应运而生了。
+(10:23:56 PM) Michael: 软件的生产率仅仅取决于可工作的软件。所谓的生产率应该是产生可工作的软件的效率。代码行只是手段
+(10:25:27 PM) Michael: 比如，你每天写1000行代码，没有可工作的软件，因为你只写数据库后台了；我每天只写50行，数据库弄一点，前台加一点，当天发布，第二天客户就能用。按照代码行统计，你的工作效率是我的20倍；但按照可工作软件的角度，你的效率是0
+(10:25:52 PM) Stephen H. Wang: 换个贴切的词，我的效果是0
+(10:26:34 PM) Stephen H. Wang: 也就是说，我每天都给客户发一个“可用的”软件，永远的beta是这个意思吗？
+(10:27:20 PM) Stephen H. Wang: 那么你研究过ISO关于质量的6个特性吗？
+(10:28:13 PM) Stephen H. Wang: 错了，是ANSI/IEEE
+(10:28:39 PM) Michael: 没..
+(10:28:41 PM) Michael: 啥特性
+(10:28:57 PM) Stephen H. Wang: Functionality, Reliability, Usability, Effetioncy, Maintenability, Portablity.
+(10:29:11 PM) Stephen H. Wang: 他们还分解成20几个小的特性。
+(10:29:15 PM) Michael: 这个没错啊
+(10:29:37 PM) Stephen H. Wang: 我们的测试人员在担心，如果不用手工测试，无法确保这些特性都达到预期的指标。
+(10:29:51 PM) Stephen H. Wang: 这个就是我疑惑的地方。
+(10:30:16 PM) Stephen H. Wang: 当然，我也在想，他们是为了保住饭碗，拼命地证明自动测试工具无法全面达到测试目的。
+(10:30:33 PM) Stephen H. Wang: 但是Agile的团队，会不考虑这些吗？我想不会的。
+(10:31:41 PM) Stephen H. Wang: 比如说吧，一个B/S的系统，应该能够运行在,windows 2000/xp/vista + IE 6,7,8  or Linux + FF or Chrome or Mac + Safari...
+(10:32:01 PM) Stephen H. Wang: 可是这些全测试的话，人工测试会花开发几倍的时间。.....
+(10:32:22 PM) Michael: 保住饭碗是个很正常的需求。正视这个需求，Agile有更好的办法解决
+(10:32:50 PM) Michael: 那就是，测试人员与开发人员属于同一个团队，在一张桌子上一起工作
+(10:33:36 PM) Michael: 测试人员的手工测试有价值，但正因如此，所以要将那些无价值的人肉回归测试纳入到自动化中，让测试人员有时间做更有价值的手工测试
+(10:34:01 PM) Stephen H. Wang: 我知道Agile的这个做法，可是这正是CMMI最反对的地方。他们认为开发和测试应该分属两个不同团队，测试人员的工资，奖金，评定等都不受开发经理的制约，这样他们才能有勇气去测试并公开全部的bug.
+(10:34:23 PM) Michael: 你觉得合理么...
+(10:34:30 PM) Stephen H. Wang: 似乎两者都合理。
+(10:34:40 PM) Michael: 开发人员跟测试人员彼此仇恨就对来两者都好吗
+(10:34:40 PM) Stephen H. Wang: 所以我最近一直在迷惘着。
+(10:34:50 PM) Michael: follow your heart...
+(10:35:17 PM) Stephen H. Wang: 而那个做法正是规避仇恨的方法。如果归于同一团队（非Agile模式下），测试人员真的没有勇气提出Bug。
+(10:35:37 PM) Stephen H. Wang: 所以，我想Agile肯定有另外的理由，使得测试人员勇于提出自己的见解。
+(10:35:42 PM) Michael: 勇气是敏捷基本价值观之一
+(10:35:54 PM) Michael: 你不提bug, 是对开发活动的不贡献
+(10:36:03 PM) Michael: 这只是个假设
+(10:36:30 PM) Michael: 事实上，敏捷团队里面，测试人员的成长比普通测试团队里面的成长更快
+(10:36:39 PM) Michael: 而且开发人员的测试观念也成长更快
+(10:36:40 PM) Stephen H. Wang: 比如：刚才提到的千行代码缺陷率，这个可能才是真正的引起开发和测试之间有矛盾的地方？ - 因为Bug率直接影响了对开发人员的评价。
+(10:36:58 PM) Michael: 其实从根本上说，就是个绩效问题
+(10:37:09 PM) Michael: 按bug数量基本上是没戏的
+(10:37:47 PM) Stephen H. Wang: 可否这么理解，开发团队和测试团队在一起，组成一个新的Agile团队，他们在一起，为了一个共同的目标而奋斗，一荣俱荣，一损俱损，才是能够让测试人员勇于提出Bug的根本原因？
+(10:37:54 PM) Michael: 程序员产生代码行，测试人员消费代码行并提出bug, 这个貌似完美的生态系统粗鲁的无视软件开发完整性的客观规律
+(10:38:00 PM) Michael: 没错
+(10:38:13 PM) Michael: 整个团队只有一个目标：产生高质量的交付
+(10:38:45 PM) Michael: 在此目标之下，以尊重  交流  反馈 勇气  简单为基本做事价值观和原则
+(10:38:55 PM) Stephen H. Wang: okay，Quality和Delivery你都提到了，那么Cost呢，前两天听到一个老实说，敏捷是高成本的。我就更疑惑了。...
+(10:39:06 PM) Michael: 谁说的...
+(10:39:12 PM) Michael: 胡扯
+(10:39:17 PM) Stephen H. Wang: 一个搞ISO/CMMI的老师...
+(10:39:30 PM) Stephen H. Wang: 来跟我们讲如何进行软件的QA活动和Measure活动。
+(10:39:50 PM) Michael: 靠，这样的话，如果没有充分的根据，会被喷的不像样子
+(10:40:21 PM) Stephen H. Wang: 是啊，可是听课的大部分都是CMMI的忠实粉丝，所以我就没有多言，但是心里却很鄙视她的说法。
+(10:40:53 PM) Michael: 你读过精益相关的书吧
+(10:41:08 PM) Stephen H. Wang: 没有读过，只是听过TW的讲座。初步了解一点。
+(10:41:24 PM) Stephen H. Wang: 知道这是起源于Toyota的一个生产汽车的思想。
+(10:41:27 PM) Michael: 精益里面的核心观念：价值  价值流  流动  拉动 尽善尽美  这个你应该略有所知...
+(10:42:32 PM) Michael: 核心思想是分析所有经营活动，找出其中的价值，找出价值流及其浪费点，使其流动，通过前端市场拉动，并让整个过程尽善尽美
+(10:43:17 PM) Michael: 例如，软件开发中有价值的活动有 需求分析，架构设计，编码，测试，部署，客户演示等
+(10:43:32 PM) Michael: 价值流基本与上述过程类似
+(10:44:08 PM) Michael: 然而，这个价值流存在巨大的浪费：从需求分析到最终客户演示，在CMMI中需要几个月甚至一年的时间
+(10:44:12 PM) Michael: 这是流不动的
+(10:44:42 PM) Michael: 而敏捷里面，消除了漫长的等待而状态转换
+(10:45:01 PM) Michael: 在一个短短的2周迭代开发中，上述所有活动都有一个完整的闭环
+(10:45:23 PM) Michael: 客户可以在最多2周的时间里，得到一个完整可用的应用
+(10:45:34 PM) Stephen H. Wang: 嗯，看来还是这个说法，就是非常多的瀑布迭代组成了一个敏捷整体。
+(10:45:59 PM) Michael: 嗯
+(10:46:01 PM) Stephen H. Wang: 那我有个故事要跟你分享一下。
+(10:46:11 PM) Stephen H. Wang: 我去年到今年做了一个项目。
+(10:46:24 PM) Stephen H. Wang: B/S的，java +jsp + DB2 + websphere
+(10:46:33 PM) Stephen H. Wang: 采用了CMMI的开发方式。
+(10:46:55 PM) Stephen H. Wang: 大约有100个左右的story（不知道你们的story是以什么级别划分的）
+(10:47:10 PM) Stephen H. Wang: 最终制作了130多个页面。
+(10:47:44 PM) Stephen H. Wang: 我的做法是这样的，先进行需求分析，彻底的分析，将每个细节都分析透彻，没有遗漏，没有二义性，没有错误....
+(10:47:51 PM) Stephen H. Wang: 然后，组织开发团队进行开发。
+(10:48:13 PM) Michael: 嗯...
+(10:48:17 PM) Stephen H. Wang: 在我们公司几近变态的测试下，1次性通过测试。（这是以往没有的经历）
+(10:48:33 PM) Stephen H. Wang: 我想知道，如果用敏捷的话，这么大规模的系统，你们大概需要多少个人月。
+(10:49:03 PM) Stephen H. Wang: 我现在已经收到客户的需求变更要求。 - 我知道，如果用敏捷，那么这些要求将会在中间出现。而不是现在。
+(10:49:22 PM) Michael: 我们不会这样估计。
+(10:49:36 PM) Stephen H. Wang: 是的，我了解，这正是不同之处。
+(10:49:59 PM) Michael: 我们会每个迭代给出一个交付版本，一般每两周给客户看一次
+(10:50:05 PM) Michael: 让客户决定优先级
+(10:50:25 PM) Michael: 当然在这之前，有一个大约2-4周的需求全面分析和优先级排序阶段
+(10:51:13 PM) Stephen H. Wang: 我的需求分析投入了4个人，2个月。也制作了Demo和上千页的文档。我跟客户用了3整天，确认了所有细节。
+(10:51:34 PM) Stephen H. Wang: 然后客户签字，这个就作为开发的依据  （当然，我这次的做法和以前比已经改革了许多）
+(10:52:40 PM) Stephen H. Wang: 状态图，流程图，ER图....这些都是辅助我对需求进行分析的工具
+(10:53:07 PM) Stephen H. Wang: Demo做的和成品都差不多了。就是数据是假的。
+(10:53:38 PM) Michael: 这种做法叫lofi-prototype
+(10:53:50 PM) Michael: 俗称原型法
+(10:53:53 PM) Michael: 也不错
+(10:54:13 PM) Stephen H. Wang: 正是如此，惭愧的说一句，我是在本公司第一个这么做的人。
+(10:54:33 PM) Stephen H. Wang: 之前的系统更糟糕。质量不如意  - 这也是我一直探究如何解决的问题。
+(10:54:51 PM) Stephen H. Wang: 举例来说，你们的测试人员会不会对左对齐右对齐，进行定义？
+(10:55:31 PM) Stephen H. Wang: 就如这MSN的IM框，显示的log一定是左对齐的。
+(10:55:31 PM) Michael: ...啥叫左对齐？
+(10:55:39 PM) Michael: 有啥用呢？
+(10:55:49 PM) Stephen H. Wang: 并且，换行的时候必须根据窗口的大小自动调整。
+(10:55:57 PM) Stephen H. Wang: 这是Usability的一项。
+(10:56:10 PM) Michael: 如果客户需要，我们就做
+(10:56:13 PM) Stephen H. Wang: 试想一下，如果Log都是右对齐的，我们看起来会是什么效果？
+(10:56:28 PM) Stephen H. Wang: 可是如果客户没提呢？你们会主动的询问客户吗？
+(10:56:33 PM) Michael: 当然会了
+(10:56:43 PM) Michael: 但...这个左对齐是常识吧
+(10:56:50 PM) Michael: 我们不做决定
+(10:57:04 PM) Stephen H. Wang: 呵呵，这个不是常识……这个是技术。
+(10:57:26 PM) Michael: 通过每个迭代的客户showcase, 让他们来提。然后统一放到剩下的，没有开发完的需求中，进行估计和优先级排序
+(10:57:54 PM) Stephen H. Wang: 金额怎么对齐？日期怎么对齐？页面太宽了，HTML不能对每一列都设置固定宽度，如果这么做，等于对所有的都没有设置。
+(10:58:37 PM) Stephen H. Wang: 所以，需要空一列不设置宽度。这样才能够在窗口缩放的时候自动适应大小。并且，可以适应多种分辨率，从1024*768 ~ 1280*1024都可以
+(10:58:55 PM) Michael: 。。。你想说啥
+(10:59:16 PM) Stephen H. Wang: 那么，空出的那一列，基本上都是显示内容最多的那列，okay,我们通常会对齐进行截断字符串，并且以tooltip的形式显示出来。
+(10:59:24 PM) Stephen H. Wang: 那么截多长呢？
+(10:59:29 PM) Stephen H. Wang: 这个也要问客户吗？
+(11:00:15 PM) Stephen H. Wang: 我想，客户不会像我这么细，连这个问题都一一说明的。
+(11:00:49 PM) Stephen H. Wang: 所以，我们的做法是，主动提案。这个地方左对齐，那个地方右对齐....并且有一套我们自己的标准（这是CMMI的常见词），然后经客户认可就行。
+(11:01:41 PM) Michael: 核心思想是一样的，就是多与客户交流
+(11:02:07 PM) Stephen H. Wang: 可是，CMMI的缺点也在于此。
+(11:02:27 PM) Stephen H. Wang: 就是做事的是人，虽然有标准，但是遵守的程度却无从判定。
+(11:02:40 PM) Stephen H. Wang: 于是，就出现了千奇百怪的现象。
+(11:02:44 PM) Michael: 哈哈
+(11:02:46 PM) Michael: 没错
+(11:02:54 PM) Michael: 这边的客户提了一个观点
+(11:03:27 PM) Michael: CMM的规矩多，但大多数都是用来破坏的；Agile的纪律少，但是要求绝对遵循的
+(11:03:41 PM) Stephen H. Wang: 比如：那个截断字符串，有人认为应该写一个java函数，然后，讲显示的内容截成20个字符固定长度，结果中英文不一样长……
+(11:04:11 PM) Stephen H. Wang: 而CMM中不会规定，截断字符串应该怎么截断。编码规范当中也没有写，于是就有了余地。
+(11:04:26 PM) Michael: 呵呵
+(11:04:48 PM) Stephen H. Wang: 然而这样的程序交到客户那里，客户说不合格。
+(11:05:43 PM) Stephen H. Wang: 而Agile用的都是高手吧？
+(11:05:58 PM) Stephen H. Wang: 所以，不会出现这样的问题也会出现错误的情况吧？
+(11:08:13 PM) Stephen H. Wang: 我最近在写一套新的系统，准备采用Agile的方式，（可惜，还是我一个人，扮演n个角色）。
+(11:09:23 PM) Michael: Agile对人的要求确实很高
+(11:09:36 PM) Michael: 不仅仅是技术层面
+(11:09:46 PM) Michael: 态度和人品也有相对较高的要求
+(11:10:36 PM) Stephen H. Wang: 我觉得知识范畴需要的太广了。
+(11:11:20 PM) Stephen H. Wang: 光页面布局就非常多的知识。
+(11:11:35 PM) Stephen H. Wang: 你看过那本书没 《Don't meke me think》
+(11:11:51 PM) Michael: 看过
+(11:12:01 PM) Michael: 这类的书多了
+(11:12:06 PM) Michael: About Face 2.0也不错
+(11:12:29 PM) Stephen H. Wang: 可是我所看过的软件，大多数都是左右结构，上下结构，或者上左右结构，左上下结构....
+……

@@ -1,0 +1,30 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "buffalo 1.2alpha1 released"
+---
+buffalo 1.2alpha1 发布，包含如下特性：
+<ul>
+	<li>* integrate prototype</li>
+	<li>* refactor and rewrite whole code into prototype-like.</li>
+	<li>* split javascript source into 4 parts: core, call, reply, bind</li>
+	<li>* modify build.xml, concat the 4 parts into one js in the dist target.</li>
+	<li>* modify the event system, change to buffalo.events["onLoading"]...</li>
+	<li>* some bugfix</li>
+<li>* 全部演示页面翻译为英文（以后发布版本的主要语言），多谢<a href="http://blog.donews.com/changzheng" target="_blank">清风</a></li>
+</ul>
+
+下载地址：
+<a href="http://www.amowa.net/buffalo/download/buffalo-1.2alpha1.zip">http://www.amowa.net/buffalo/download/buffalo-1.2alpha1.zip</a>
+
+此次的发布比原来声明的时间大约晚了三周，主要原因是一直找不到支持subversion的代码仓库。跟dev.java.net邮件往来多次，最后得知无法获得svn服务，只好作罢。多亏了<a href="http://www.redsaga.com" target="_blank">曹晓钢</a>的鼎力帮忙，在生病的情况下依然帮助我搭建并调试svn. 祝愿他早日康复。现在代码放在了redsaga上。
+
+本想将版本号定义为1.1.1alpha, 但是由于本次版本变更在javascript部分实在巨大，完全集成了prototype的基础设施，写法跟过去有了很大不同，因此更改为1.2. 在外部api调用上，最大程度的保证了跟以前遗留代码的兼容。如果发现有问题，请在<a href="http://groups.google.com/group/amowa">buffalo论坛</a>中提出。很多常见的问题已经在那里提出了。
+
+之所以集成<a href="http://prototype.conio.net/" target="_blank">prototype</a>, 是因为他的提供的语法级别的基础设施相当便利，并且在常见的HTML操作的处理上，提供了相当多的方便的封装，如$, $F, Form等，我相信这些便利的方法会给web开发者带来更高的工作效率。
+
+自这个版本后，buffalo javascript部分将不再作重大更新。剩下的工作将专注于java部分的工作，包括效率，bug, 以及最主要的部分：页面框架。
+
+建议，意见，欢迎发往buffalo 论坛<a href="http://groups.google.com/group/amowa">http://groups.google.com/group/amowa</a>。最后向那些久等的朋友们说一声：对不起，来迟了！

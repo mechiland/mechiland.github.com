@@ -1,0 +1,13 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "重拾EJB"
+---
+<p>Ed Roman的《Mastering EJB》在我手上放了一年多，前两天才正式开始看，今天终于把第一篇看完了，对SessionBean, EntityBean, MessageDrivenBean做了个回顾；同时继续体会着EJB强大而严整而优美的体系。重新阅读这本书并非我情愿。我要找新工作，大部分相关的工作都要求J2EE背景。虽然我非常熟悉Servlet, JSP, 以及一系列的开发框架，但是不愿意学习EJB以至于我一直都羞于跟人提起我懂J2EE。EJB是J2EE的灵魂。虽然在我情愿使用J2EE框架中的其他组件集如JTA, JAAS, JCA，却对EJB讳莫如深。原因很简单，设计过于复杂。我大致上了解EJB的基本结构却从不考虑使用。记得今年的Sun Java TechDays上，我问Doris Chen博士，&#8221;I like J2EE, but should I use EJB in every application?&#8221;她的回答显然不令我满意：&#8221;No. If you need transaction, use EJB, otherwise you don't have to.&#8221;。</p>
+<p>现在重读既然迫不得已，但是决定读，就得好好读。好在我找到了一个久已安装但从未使用的Eclipse插件Lombz，并且在找它的更新的时候找到了这篇<a href="http://www.tusc.com.au/tutorial/html/index.html"><font color=#0000ff>很棒的教程</font></a>。这篇教程让我从无趣的编写4个接口(Home接口, LocalHome接口，Remote接口, Local接口)中逃出，这使我真正觉得编写EJB简单起来，并且暂时忘却了EJB设计的复杂。后来我发现Lombz简直就是XDoclet的ejbobject Task的封装，又觉得Lombz不过尔尔，又异想天开自己编写一个插件（想到我的前一篇Blog了，应该沉静）。</p>
+<p>真正读完第一部分，我发现EJB并不复杂。理解了Rmi调用，理解了SessionBean与EntityBean的定义与区别，理解了Application容器调用EJB的过程，一切都很明朗了。再利用Lombz，从真正实际的Bean开始开发而不是首先一堆Remote Interface，更加符合我的开发习惯；在标准的javadoc中加入若干ejb标签，XDoclet能够自动生成其他的相关接口，甚至Bean Manage Persistence EntityBean的DAO接口。EJB的神秘感消失了，我不再讨厌它了，甚至有在下一个项目中使用它的想法。目前唯一的麻烦在于，如何在EJB中应用最佳实践，如何在Stateful SessionBean/Stateless SessionBean中作出选择，如何选择本地、远程接口等等需要在实际项目中思考的东西。</p>
+<p>有几点我不太明白的地方：</p>
+<p>1 CMP看起来很不错，在容器能够胜任的情况下，如何选择Hibernate(或JDO)和CMP?</p>
+<p>2 如果在EJB中使用Hibernate或者JDO作为O/R映射持久层&#8212;&#8212;毫无疑问要用到DAO模式&#8212;&#8212;那么这个Bean就是BMP了，不过这个ManagedBean的具体实现由Hibernate（或JDO）代劳了。如果这个前提成立，Hibernate现在已经足够强大，那么Hibernate的出现，EntityBean将不存在BMP与CMP之分了？</p>

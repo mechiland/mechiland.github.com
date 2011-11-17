@@ -1,0 +1,12 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "Echo2，该来的还是来了"
+---
+我预计的不错，一个采用ajax思想实现的web框架，Echo2(http://www.nextapp.com/products/echo2)，果然出来了。只是这未免太快了。
+
+Echo2采用了跟Echo同样的渲染模型和事件模型（跟ASP.NET很像，组件机制跟Tapestry很像），不同的是事件的传递/调用/结果返回都是采用xml消息实现。因此，我宁愿称这个框架为Amowa的一个典型实现。
+
+一些美中不足的是，消息发送之后，服务端还是返回整个界面描述；而不是仅仅发生变化的控件。这里面应该还有优化的余地。

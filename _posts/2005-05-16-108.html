@@ -1,0 +1,25 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "WSAD的又一个问题：cmd.exe /C java.exe -version"
+---
+今天调试java程序中创建新进程的程序，代码大致如下：
+
+	Runtime rt = Runtime.getRuntime();
+	Process proc = rt.exec(new String[]{"cmd.exe","/C", "java", "-version"});
+
+我将WSAD默认jre设置为jdk1.4.2, 替换了它默认的IBM jdk1.3.1. 任何人一看就知道，这个进程的运行输出应该是类似于java version "1.4.2_06"之类的字符串，然而在WSAD中，运行结果却是java version "1.3.1" ... J2RE 1.3.1 IBM Windows 32 build cn131-20031021. 将这段代码放到eclipse3.0中运行，显示1.4.2没问题；放到命令行下运行，也显示1.4.2. 看来是WSAD搞的鬼，于是索性修改了一下代码：
+
+	Process proc = rt.exec(new String[]{"cmd.exe","/C", "echo", "%PATH%"});
+
+在命令行下运行cmd.exe /C echo %PATH%, 结果是
+	C:\WINNT\system32;C:\WINNT;C:\WINNT\system32\WBEM;c:\ruby\bin;C:\Perl\bin\;...
+
+而在WSAD中运行，结果赫然是：
+
+	C:\Program Files\IBM\WebSphere Studio\Application Developer\v5.1.2\eclipse\jre\bin;C:\WINNT\system32;...
+
+毫无疑问，是WSAD在启动时修改了PATH变量，使得在搜索java.exe时直接找到了IBM JDK1.3.1. 
+

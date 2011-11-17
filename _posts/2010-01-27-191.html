@@ -1,0 +1,19 @@
+--- 
+layout: post
+status: draft
+type: post
+published: false
+title: "code test"
+---
+[ruby]class Idea &lt; ActiveRecord::Base
+  has_many :tasks, :order =&gt; 'created_at desc'
+  has_many :sparks, :order =&gt; 'created_at desc'
+  
+  def create_task name
+    self.tasks.create(:name =&gt; name) unless name.blank?
+  end
+  
+  def sparkle content
+    self.sparks.create(:content =&gt; content) unless content.blank?
+  end
+end[/ruby] 

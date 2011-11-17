@@ -1,0 +1,43 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "用JEdit进行Ruby/Rails开发"
+---
+在windows/linux下面，我尝试了多种组合来进行rails开发，所进行的尝试包括：
+
+* windows: Editplus（我用了好多年的编辑器） + 控制台
+* windows/linux: RadRails
+* linux: GEdit + snippet plugin + terminal
+* windows/linux: jedit
+
+最终发现，自定义能力极强以及插件/Macro众多的JEdit可能是TextMate之外最方便的编辑器。下面是截屏：
+
+<a href="http://mechiland.googlepages.com/jedit-rails-1.PNG"><img src="http://mechiland.googlepages.com/jedit-rails-1.PNG" alt="" width="200"/></a>
+
+打开文件：
+
+<a href="http://mechiland.googlepages.com/jedit-rails-2.PNG"><img src="http://mechiland.googlepages.com/jedit-rails-2.PNG" width="200" alt="" /></a>
+
+特点：
+
+* 自定义功能极强的abbreviation功能，类似于TextMate中的snippets, Eclipse中的Template。Linux下GEdit也有类似的插件
+* 语法加亮
+* rails项目视图
+* 快速打开某一个文件（我现在将这个功能绑定为Ctrl+N，用起来跟IntelliJ IDEA一样了）
+* 精心的类比TextMate的配色
+
+基础配置参考<a href="http://saimonmoore.net/permalink/jedit-for-ruby-rails-development">这里</a>
+
+注意，最好安装JEdit 4.2stable版本，4.3版本与文中提到的某些插件（如SupperAbbrev）并不兼容。我所做的一些增强如下：
+
+* 从<a href="http://rubyjedit.org/download/">这里</a>下载ruby mode语法文件。jedit自带的语法不够全面。
+* 从<a href="http://community.jedit.org/?q=filestore/browse/21">这里</a>找到更新的html/css的语法文件并覆盖原有的mode文件，注意备份。Jedit自带的mode支持有限。
+* 到<a href="http://community.jedit.org/?q=filestore/browse/23">这里</a>找到更漂亮的图标。许多人放弃JEdit是因为默认的图标实在太难看了。
+* 下载我调制的颜色方案：<a href="http://mechiland.googlepages.com/RealTextMate.jedit-scheme">在这里</a> 放在~userhome/.jedit/schemas 目录下面，用Editor Schema Selector插件选择使用。
+* 从<a href="http://synthesis.sbecker.net/articles/2006/03/20/jedit-snippets-for-ruby-on-rails">这里</a>下载rails的缩写文件 （重要!）。以后如果要扩展自己的缩写片段，可以参考已有的，或者参考<a href="http://www.ifakedit.com/log/2006/02/19/jedit-tutorial-a-how-to-on-abbreviations-superabbrevs-in-html-ruby-on-rails-and-more/">这里</a>
+* 安装增强Mac字体，有两个选择：<a href="http://www.gringod.com/2006/02/24/return-of-monacottf/">Monaco</a>或者<a href="http://www.tobias-jung.de/seekingprofont/">ProFontWindows</a>。当然你可以用你喜欢的字体，这两个字体是Mac的默认字体。
+* 定义自己的快捷键。我定义的快捷键：Ctrl+H: 显示文件结构，Ctrl+ENTER: 自动扩展缩写，Ctrl+SPACE: 自动完成，Ctrl+D: 复制一行，Ctrl+Y: 删除一行，CTRL+ALT+UP/DOWN: 行上移/下移。
+
+通过以上配置，你就可以在windows下面拥有一套相当便利的rails开发环境了。在出手MacBook之前，这就是我开发rails应用的IDE。

@@ -1,0 +1,24 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "JSValidation move to sourceforge"
+---
+真是有意思，04年4月发布的jsvalidation, 在发布的时候受众不多，居然现在被越来越多的提及。看来纯粹的客户端校验还是很有需求的。今天登陆了一下sourceforge, 发现04年申请的项目jsvalidation现在可以使用了，于是索性将代码挪到了sf。
+
+jsvalidation需要继续发展。根据需求，要加入的特性如下：
+
+
+* 添加校验域的属性支持，校验规则不仅仅支持xml文件，还支持在要校验的表单元素中添加一个属性，例如 
+
+[xml]
+<input type="text" name="age" restriction="required integerRange(18,60)" />
+[/xml]
+
+* 更多的校验规则支持。原有的代码会重构，以接纳贡献者的校验规则。
+
+* 加入校验失败时的回调动作，以方便开发者对校验错误进行自定义的显示。
+
+
+还有更多的需求吗？请留言。

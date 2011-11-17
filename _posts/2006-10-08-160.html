@@ -1,0 +1,26 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "buffalo 2.0-alpha1 released"
+---
+没什么可说的了，从2005年4月至今，buffalo走过了1.0, 1.1, 1.2到现在的2.0
+
+最大的改变是彻底抛弃了burlap，新的协议以及实现完全重新编写（相当于一个定制的xml pull parser）速度相当快，几乎接近于纯文本的处理速度。另外的改变是为了适应项目国际化以及更好的代码环境，buffalo从java.net迁移到了sourceforge，并且使用maven作为项目管理工具。另外，修复了若干bug。
+
+完整的特征列表如下：
+
+* 支持方法重载
+* 重新实现协议，更好的解析和缓存，效率比1.2.x系列提升30%
+* onTimeout和onException事件支持
+* 更友好的错误信息显示
+* 代码库迁移到sourceforge，采用subversion
+* 采用maven管理项目
+
+下载地址：
+
+* <a href="http://buffalo.sourceforge.net">http://buffalo.sourceforge.net</a>
+* <a href="http://sourceforge.net/project/showfiles.php?group_id=178867&package_id=206392&release_id=453305">下载2.0alpha1</a>
+
+这个版本的推出主要是为了检验新的协议解析器，有任何问题请到<a href="http://groups.google.com/group/amowa">buffalo论坛</a>进行讨论。2.0正式版的发布将主要取决与文档的完善情况。

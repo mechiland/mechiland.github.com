@@ -1,0 +1,8 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "MDA，业务其中，技术其次"
+---
+<p>MDA本意是模型驱动开发，模型自然就是业务模型了，这个描述想当贴切……一切以业务而开始，开发而其次，是业务模型驱动了开发。弄清楚了这一点，就会明白，MDA的思想是方法学的范畴，跟技术关系不是太大。MDA中的关键概念——PIM(平台无关模型)和PSM(平台相关模型)，将业务与技术隔离开来。PIM与PSM的概念隔离绝对是有必要的，而并非Intentional Programming(IP)那样，能够将“意图”与代码表现一致就认为万事大吉。（IP中每一个AST（抽象语法树）的节点就是一个元数据模型思路是好的，但是这个元数据的粒度的概念没有MDA中的清晰。所以我认为IP应该只是一个实验室的东东，而不应该会在工业开发中占据一席之地)</p> <p>若要完全实现MDA的思想，那么最重要最基础的应该是建立一套元数据模型，这一套模型是与实际业务息息相关的，一旦这套模型建立，那么遵循这个标准的所有厂商都会从中获益。用MDA的广告说：遵循MDA思想的系统将"for yestoday, today and tomorrow". </p> <p>但是Martin Fowler对此并不感冒。<a href="http://martinfowler.com/bliki/ModelDrivenArchitecture.html">http://martinfowler.com/bliki/ModelDrivenArchitecture.html</a>&nbsp; 我个人的想法也是这样。这种思想可以被很多厂商借鉴，但是是否遵循MDA标准，我持否定态度。在我看来，建立一套模型的成本太高，而且从MDA的思想提出至今，也只有代码生成器一类的东西问世，我所关注的、行业相关的mof模型实在是太少了，更不谈业务规则复杂得要命的如社保系统、财务系统。</p>

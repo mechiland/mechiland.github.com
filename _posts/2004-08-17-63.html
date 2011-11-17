@@ -1,0 +1,8 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "JSValidation 1.0b4 released"
+---
+<p>JSValidation是强大便利的JavaScript客户端验证框架，用以在开发BS系统的过程中，已有开发框架不提供表单验证的情况下，提供一种便利的，易于管理的验证方案。不论你使用ASP/JSP/PHP/Perl或者任何一种脚本语言，JSValidation都可以工作得很好。</p> <p>感谢各位用户对它的热爱。在收集众多要求的基础上，1.0b4版更加健壮、灵活，实用。简单和实用是JSValidation追求的目标。本次更新如下：</p> <p>* 修正了以下Bug:<br />&nbsp; 1) 密码与确认密码在提示时，提示信息为"密码与password必须一致"&nbsp; (呼声很高 ;-))<br />&nbsp; 2) 在Mozilla浏览器环境中，对普通ASCII字符判断错误.（严重）<br />&nbsp; 3) 校验失败后，光标应该停在第一个出错的域中。（普通）<br />&nbsp; 4) 在IE5.0中完全不能校验（严重）</p> <p>* 增强了功能：<br />&nbsp; 1) 增强了多表单的处理，对于新的处理方式稍微麻烦，但是分布式管理的validation-config.xml更能够适合多人协作。<br />&nbsp;&nbsp;&nbsp;&nbsp; 例如，原来只需要在Html页面顶端引入&lt;script src="path/to/jsvalidation.js"&gt;，现在除了这种方式，还可以加上<br />&nbsp;&nbsp;&nbsp;&nbsp; &lt;script&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ValidationFramework.init("validation-config.xml");<br />&nbsp;&nbsp;&nbsp;&nbsp; &lt;/script&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp; 多添这一句使得validation配置文件能够分开存放，在多人项目中非常重要。当然，原有方式继续保留。</p> <p>&nbsp; 2) doValidate()方法现在更加易用，只需要在需要验证的表单上加入doValidate(this)即可。当然，&lt;form&gt;标记中的ID还是必须有的。</p> <p>&nbsp; 3) 增强了错误的显示方式。目前可以在form的配置文件中选择是显示全部还是显示第一条。（show-type="all|first"）<br />&nbsp; <br />&nbsp; 4) 增强了错误的显示效果，可以在validation-framework.js中对ValidationFailCssStyle进行更改。（这个功能不知是否实用）<br /></p> <p>项目地址：<a href="http://cosoft.org.cn/projects/jsvalidation/">http://cosoft.org.cn/projects/jsvalidation/</a></p> <p>论坛：<a href="http://cosoft.org.cn/forum/forum.php?forum_id=7008">http://cosoft.org.cn/forum/forum.php?forum_id=7008</a></p> <p>欢迎使用与反馈。</p>

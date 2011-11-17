@@ -1,3 +1,21 @@
-auto: true
-permalink: /:title
+# Jekyll Configuration
 
+url: http://localhost:4000 #XXX
+title: Michael Chen's Blog #XXX
+description: World in my view is a word of my view #XXX
+author: Michael Chen #XXX
+email: mechiland@gmail.com #XXX
+analytics_id: UA-199699-1 #Google Analytics ID : UA-xxx-xxx  
+
+auto: false
+lsi: false
+pygments: false
+server_port: 4000
+markdown: maruku
+permalink: /archives/:title
+
+maruku:
+  use_tex: false
+  use_divs: false
+  png_dir: img/tex
+  png_url: /img/tex

@@ -1,0 +1,84 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "正本清源：所谓Ajax输出的三种形式"
+---
+<a href="http://www.quirksmode.org/blog/archives/2005/12/the_ajax_respon.html">QuirksBlog: The AJAX response: XML, HTML, or JSON?</a>
+
+说实话，我没想到Bing Ran会问我这个问题。早先这篇文章在TSS上贴出的时候，我很快的浏览，便一眼看出这篇文章作者所处的角度。事实上，AJAX概念的不完整和不严密性 ——异步的JavaScript + XML——导致作者将AJAX的输出分为三种类型：XML, HTML片断和JSON对象字符串。
+
+首先看XML。对于RPC的数据传输，XML从来都是当仁不二的选择。对于将对象序列化为XML字符串的方式，往往有两种选择，一种是将对象本身的属性作为节点进行输出，一种是利用语言的元数据特性进行序列化输出。两者存在较大不同。对于第一种，输出案例如下：
+
+[xml]
+<books>
+    <book>
+        <title>JavaScript, the Definitive Guide</title>
+        <publisher>O'Reilly</publisher>
+        <author>David Flanagan</author>
+        <cover src="/images/cover_defguide.jpg" />
+        <blurb>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</blurb>
+    </book>
+    <book>
+        <title>DOM Scripting</title>
+        <publisher>Friends of Ed</publisher>
+        <author>Jeremy Keith</author>
+        <cover src="/images/cover_domscripting.jpg" />
+        <blurb>Praesent et diam a ligula facilisis venenatis.</blurb>
+    </book>
+</books>
+[/xml]
+
+而对于第二种，输出案例如下：
+
+[xml]
+<list>
+    <type>java.util.List</type>
+    <map>
+        <type>yourapp.domain.Book</type>
+        <string>title</string>
+        <string>JavaScript, the Definitive Guide</string>
+        <string>publisher</string>
+        <string>O'Reilly</string>
+        <string>author</string>
+        <string>David Flanagan</string>
+        <string>cover</string>
+        <string>/images/cover_defguide.jpg</string>
+        <string>blurb</string>
+        <string>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</string>
+    </map>
+    <map>
+        <type>yourapp.domain.Book</type>
+        <string>title</string>
+        <string>DOM Scripting</string>
+        <string>publisher</string>
+        <string>Friends of Ed</string>
+        <string>author</string>
+        <string>Jeremy Keith</string>
+        <string>cover</string>
+        <string>/images/cover_domscripting.jpg</string>
+        <string>blurb</string>
+        <string>Praesent et diam a ligula facilisis venenatis.</string>
+    </map>
+</list>
+[/xml]
+
+前 一种一般来说是同一进程内（同一JVM内）对对象进行序列化和反序列化的方法，在XML-Java绑定一类的框架中比较多见，例如 XStream, JiBX, Castor等等。当同一进程内能够找到对象具备的正确类型时，这种序列化/反序列化设计和实现都不太困难，而且针对空值处理也比较容易。
+
+可以看出，由于这种方式成本较低，有大量成熟的开源库可用，加上在AJAX中的X(ML)的“理论”指导下，许多开发者采用这种方式将对象输出给前 台浏览器，然后利用浏览器的XML能力进行输出显示。从那篇文章中可以看出，这种工作是纯粹的dirty work, 并且由于领域模型或者DTO的不同，输出的xml结构含义也不同，在对空值的处理上更是麻烦，在处理显示逻辑的时候，基本上很难在客户端对以这种方式传递 的XML以一种统一的方式进行还原。以这种方式来进行AJAX开发，小规模应用还不能显出弊端，但是大规模应用出现，领域对象较多时，必然出现怨言。而我 们使用AJAX的真实意图并非来无趣地去解析各种各样的XML，而是需要XML中代表的数据。至于XML是什么样子，除了调试阶段，没有人会关心。
+
+第二种XML的序列化方式是绝大多数跨进程远程调用协议/框架所采取的方式。SOAP/WebService如此，XMLRPC如此， Buffalo采用的Burlap也如此。这种远程调用的特征是，在协议约定的条件下，调用方和被调用方需要保证数据语义的完整性。拿什么保证？就是数据 定义信息了。这些协议的共同特征是采用谋一些标记来描述数据类型：int, long, float, string, list...这样定义完成后，只要根据协议，任何语言都能以一种通用的方式对数据进行还原。AJAX引擎的概念也就渐渐呈现——通过某一种协议，他就处 于中间的位置，负责将调用方的请求包装为协议，转化为执行方能够理解的动作加以执行；然后将执行结果转化为协议的值，传递给客户端，客户端引擎将协议内容 解析为能够理解的对象结构传递给客户端，然后就可以利用这个数据来显示了。XML-RPC如此，WebService如此，DWR如此，JSON如此， Buffalo也如此。
+
+综上所述，纯粹使用领域模型特定的输出XML传递给客户端是一种相当原始的做法。他只在很低的层次上印证了所谓AJAX的概念。然而，这种概念的深入思维结果便是一个AJAX引擎。
+
+文中提到的第二种输出方式：HTML——应该被看作WEB的一个特例，应该说这是历史因素、浏览器能力、设计者等多方因素达到的一个平衡。许多历史 应用中，大多采用将页面进行一定规则的分割，然后include或者jsp 2.0 tagfile的方式对公共区域进行处理，留下一小部分进行动态显示。这里举一个例子：查询，显示书籍列表。传统做法就是上面一个搜索条件输入文本框，下 面是搜索结果列表，处于同一个页面。原来的搜索方式每次提交都要刷新整个页面，用户体验不太好，现在需要改进。按照激进的Ajax做法应该是当搜索按钮点 击时，调用bookSearchService.search(String terms)的方法，取得结果列表，然后Ajax引擎处理结果数据，将数据反序列化为javascript对象，开发者利用这些对象，要么利用DOM, 要么利用JavaScript Template, 在页面对搜索结果进行展示。然而，问题出现了：
+
+搜索结果太多了，用DOM操作速度太慢；
+开发者人手不够，没有时间，而这个页面以前写过；
+
+那么出现这种情况时，很可能的做法便是，见原来那个搜索结果页面刨去其他不相干的部分，留下搜索结果部分，然后利用一个resultDiv.innerHTML=xmlhttp.responseText搞定。这样做，既达到了改善体验的效果，也提高了开发速度。
+
+输出HTML另外一种方式文中也没有提及。事实上，HTML不仅仅作为片断，更重要的是作为页面视图的一部分。在buffalo的demo中，可以 看到所有的页面都被管理起来了，buffalo接管了视图的切换；这种设计也存在于gmail/163新版邮箱中。这个应用比上面的HTML片断的使用方 式还要重要，因为这里是缓存可以介入的地方。通过不同的缓存策略，可以将用户的实际和心理等待时间大大减少，从而进一步改善用户操作体验，提升产品竞争 力。（PS. 在Buffalo 1.3中将加入客户端缓存模块，无需你动手，buffalo为你缓存视图）
+
+文中提及的第三种方式，JSON，根据第一部分的描述，应该比较清楚了。实际上他扮演了一个Ajax引擎的角色。这里不得不提的是，使用JSON的 相当危险的。因为他的协议表现与语言本身绑定太死。如果某一天，JSON协议变化了，那么使用JSON的应用基本上不可能应对这个变化——因为返回结果是 eval()得到的。而Buffalo将协议隐藏起来了，1.2版本甚至连服务器端的ServiceInvoker都将burlap实现依赖隔离开。现在 使用burlap，也许某一天不用了，buffalo的应用照样可以运行。因为里面的细节都是透明的，作为开发者，你只需要关注数据对象本身，而非用来描 述对象的那一堆字符。

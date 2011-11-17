@@ -1,0 +1,35 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "Friendly URL应当作为web2.0应用首先要考虑的问题"
+---
+web2.0概念的提出给这个灰暗的web应用世界带来了鲜活的色彩；而ajax的使用又给用户提供了更好的操作体验。然而，在具体的使用上，他们 给开发者带来的考虑不是更少而是更多。ajax滥用比不用更加可恶——满屏的loading实在不是什么好的体验。如何真正给用户提供真正易于理解舒心畅 快的应用，是2.0应用开发者首先需要考虑的问题。
+
+OPOA提出后，我一直在考虑一个问题：如何将操作型应用与内容型应用有机的结合起来呢？这个问题的提出并非空穴来风。实际上，除了类似于邮件这样 的简单应用不需要考虑友好URL之外，大部分web应用，无论是企业应用还是面向消费者的 web2.0应用，都存在面对友好URL的问题。例如：到底是portal/index.action?userid=10001比较好看还是 portal/michaelchen比较好看？到底是michaelchen/photo/12319 比较容易懂还是 photo/viewPhoto.action?userid=10001&photoid=12319 比较容易懂？
+
+答案是很容易看明白，<a href="http://www.w3.org/Provider/Style/URI">一个好的URL不应该经常变动</a>。
+
+一个典型的web2.0应用在URL上首先是友好的：看看成功的应用大多如此：Flickr,  del.icio.us, 豆瓣，等等。体贴的URL为传播、共享、搜索提供了潜在的巨大的便利，只有那些操作型应用系统才不需要考虑URL的组织方式。
+
+因此，一个典型的web2.0应用，首先要考虑的是如何组织对外的URL——这个URL规则一旦建立，以后要进行变更的可能性就比较小（因为成本巨 大，无数 的人链接到了这个地址）。你可能采用某一个独立的模块来对这一部分进行维护。遗憾的是，传统的J2EE框架在这方面所做的事情少之又少，无论是 webwork还是struts, 都没有明显的对这方面的支持（所以说用这类框架做web2.0应用很痛苦）；tapestry相对好一些，在4.0中可以对url进行定制。另外<a href="http://tuckey.org/urlrewrite/">UrlRewriteFilter</a>对传统应用进行了修饰，但遗憾的是，怎么用怎么感觉不太好。
+
+如何解决？我能想到的一个比较清晰的架构是：从一开始就考虑URL的结构，采用一个独立的servlet来管理URL链接，它的功能与 UrlRewriteFilter类似，但是它的结合点不是类似于product.action?id=xxx路径本身，而是直接指向相对应需要运行的 Struts/Webwork Action（或者Spring MVC的Controller）。
+
+下午的时候无意中看到了<a href="http://www.djangoproject.com/">django</a>, 这个新型的类似于rails的快速开发框架，显然更懂web2.0——直接有了一个urls.py文件来对各类url映射进行配置，能够直接将某一个正则表达式支持的路径映射到一个执行的方法：
+
+[python]
+patterns = patterns('',
+(r'^blog/$', 'blog.views.page'),
+(r'^blog/page(?P\d+)/$', 'blog.views.page'),
+)
+
+# View (in blog/views.py)
+def page(request, num="1"):
+# Output the appropriate page of blog entries, according to num.
+[/python]
+
+上面的例子是不是能够给我们带来一些启发？
+
+写到这里，我有了一些结论：一个完整的web2.0应用结构上应当包含两部分：URL处理引擎和Ajax引擎。前者用于在整个WWW范围内共享传 播，后者用于改善单个用户的操作体验。这样，架构渐渐完整和清晰了。不得不说的是，目前我还没有看到任何一个JavaEE web框架明显的独立出url处理引擎的概念，tapestry做了一些，但还不够独立，SpringMVC/Webwork/Struts更不提。也许 这与java在企业应用漫长的时间有关，但是在现在，这些框架已经表现出落后了。是不是buffalo应该做这件事情呢？

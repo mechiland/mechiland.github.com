@@ -1,0 +1,30 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "AJAX下一站：更快的响应（关于Comet）"
+---
+http://www.ruby-forum.com/topic/62907 提到了Armageddon，顺着link找，又看到了<a href="http://www.irishdev.com/NewsArticle.aspx?id=2166">COMET - the next stage of AJAX</a>， <a href="http://www.irishdev.com/NewsArticle.aspx?id=2173"> Comet: Beyond AJAX </a>。简单的解释Comet：传统的HTTP技术是客户端主动拉服务器端内容，每次更新需要刷新整个页面，这种方式在带宽不足的情况下用户体验尤其恶劣；AJAX让这个过程转到后台，将一次性的全页面载入转变为多次的小批量异步载入从而改善交互体验；而针对基于网页的及时通信等应用，这种每隔几秒的请求响应不够快，而且无状态的HTTP协议对服务器端效率的影响比较大。
+
+如果说AJAX是新瓶装老酒，那么Comet则干脆连新瓶子都不用了。早在2002年更早的时候，<a href="http://www.pushlets.com/">pushlet</a>提出的概念让我眼前一亮，基本原理是将需要持续更新的内容放到一个永远也下载不完的页面中(JSP代码)：
+
+<pre lang="java">< %
+int i = 1;
+try {
+    while (true) {
+    out.print(""+(i++)+"");
+    out.flush();
+    try {
+        Thread.sleep(3000);
+    } catch (InterruptedException e) {
+        out.print(""+e+"");
+    }
+} catch (Exception e) {
+    out.print(""+e+"");
+}
+%></pre>
+
+这就是Comet的基本原理。其他的基于HTTP协议的Comet实现大多数原理如此，为了更好的提高效率，Event-Driven IO会被大量使用，如Java NIO, Twisted. 03年发现一个<a href="http://bbs.51js.com/viewthread.php?tid=11908&fpage=1">基于Web的网络游戏</a>，也是这个原理。在我研究Amowa期间，发现利用Flash作代理，利用它的remoting或者XMLSocket能力，也可以实现实时的web应用。
+
+这种技术的引入将带来web应用开发方式的一些变化，基于事件的实现方式可能更容易在Comet中使用。晚些时候我再详细探讨这些概念技术对web开发带来的影响。

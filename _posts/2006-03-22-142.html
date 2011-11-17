@@ -1,0 +1,78 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "关于buffalo的安全问题"
+---
+感谢董董以及各位用户提出这个问题。这个问题在以前的时候虽然留意过，但没想到会给实际的运行用户带来这么大的影响；现在看来，很有必要为buffalo加上安全控制的部分了。
+
+考虑到一些实际运营的系统已经上线，以及buffalo升级新版本的速度无法满足现在的需要，现在提出一些解决方案供参考。由于时间关系，这些方案没有经过实际的代码验证，但在方向以及结构上没有问题，供急切的同志使用。
+
+1 问题提出
+
+当一个应用部署到www.domain-a.com的时候，buffalo的特定servlet被暴露出来，这个servlet只接受buffalo请求(xml格式)。我们知道xmlhttp无法跨域访问，但在IE浏览器中，如果本地存在访问这个远程buffalo服务的网页并运行，你会发现没有任何警告就能访问远程。这是相当危险的操作，因为很多时候buffalo不仅完成读取数据，还完成修改数据的操作。恶意用户如果知道服务方法的命名，很容易模拟请求发送，造成损害。
+
+这个场景同样存在于将页面置于http://localhost/
+的情况。IE会认为这是本地操作，可以访问远程，只是会弹出一个警告是否允许与远程数据交互。但这种情况不会出现在www.domain-b.com上——也就是说，两个远程域之间的交互是不可以的。
+
+然而，在Firefox上——根据我的测试，无论是本地，还是localhost, 都无法与domain-a.com交互。他的安全限制更严格。
+
+2 如何解决问题？
+
+现在我们知道这个问题归根结底是xmlhttp的问题。几乎所有的带有java->javascript序列化的框架都存在这个问题，dwr,
+json, buffalo都有。http://getahead.ltd.uk/dwr/security
+这里讨论了dwr的安全问题，文档中很巧妙地将这个问题回避过去，但是这里
+http://iremia.univ-reunion.fr/intranet/wiki/Wiki.jsp?page=DWRandAcegi
+又提供了对应的解决方案。这个解决方案针对buffalo也同样有用。
+
+问题解决的基本原理是根据cookie来进行校验(或者session，都可以)。我们知道，从file://a.html发送到http://domain-a.com的请求，如果此时我们获取request.getCookie，是无法获取的，这可以作为判断的依据；session也一样；他们都只对特定域名以及当前应用下的请求保留session或者cookie状态，来自其他地方的请求不包含这些状态，因此可以进行区分。区分开之后，就可以拒绝这些请求，要么抛异常，要么转到其他页面。
+
+实现方式上，根据buffalo service的部署方式的不同，可以分为两种：
+i) 写在properties文件中。我估计没有多少系统这样做因为创建服务实例效率低下。但如果这么做了，可行的办法就是改写代码，在代码中加入访问来源地判断(request.getCookie).
+这是简单的做法，如果代码不多可以这么完成。一些静态植入的AOP方案可以更优雅的解决这个问题，如AspectJ, AspectWerkz等
+
+ii) 写在Spring配置文件中。这种方式下比较容易。步骤如下：
+ - 将原来的service移入到ProxyFactoryBean中
+ - 在ProxyFactoryBean中添加一个拦截器
+ - 拦截器完成了方法调用的拦截
+ - 其他代码不变
+
+例如：原来有一个UserService:
+
+<bean id="userService" ...>
+
+现在改为
+</bean><bean id="userServiceBuffaloTarget" ...>
+
+添加一个ProxyFactoryBean并设置拦截器：
+</bean><bean id="userService" class="...ProxyFactoryBean">
+   <property name="target" ref="userServiceTarget"/>
+   <property name="interceptorNames">
+           <idref local="myBuffaloSecurityInterceptor" />
+       </property>
+</bean>
+
+myBuffaloSecurityIntereptor:
+
+class MyBuffaloSecurityInterceptor implements MethodInterceptor
+   Object invoke(MethodInvocation i) throws Throwable {
+
+     HttpServletRequest request = context.getRequest();
+    if (request.getCookie()...) {
+          return i.proceed();
+     } else
+    throw SecurityException;
+
+  }
+
+Request对象的获取方式可以加入一个filter每次请求的时候绑定到ThreadLocal中。
+
+上述方案供参考。
+
+3 考虑更多...
+
+由于http是无状态的协议，xmlhttp的引入使得他远程调用的意味更加浓厚。这样的话，许多客户端可以对远程服务进行hack.
+这就超出了buffalo所能控制的范围。Prototype中直接回避了这个问题而只提供AHAH的方式使得这些问题能够被传统的网站安全技术来处理。
+
+安全方面，acegi更加全面但也带来相当的复杂性和学习成本；在这个案例中，应用的安全不是最重要的，相反访问的安全才最重要。上述的方案能够防止服务器方法被恶意执行，但无法防范被恶意重复访问。当然这可以通过常规的安全策略来控制了。

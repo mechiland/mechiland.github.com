@@ -1,0 +1,28 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "让SpringMVC也支持自定义url mapping"
+---
+<a href="http://opensource2.atlassian.com/projects/spring/browse/SPR-703">[#SPR-703] Make Controller aware of the url mapping - Spring Framework</a>
+
+提供了一个RegexUrlMappingHandler, 可以支持类似于以下的使用：
+
+[xml]
+<bean id="regexUrlMapping" class="spring.handler.RegexUrlHandlerMapping">
+        <property name="mappings">
+<props>
+    <prop key="/archive/(\d{4})/(\d{2})/(.*).html">blogArchiveController</prop>
+</props>
+        </property>
+</bean> [/xml]
+
+在Spring controller中：
+
+[java]
+Map objects = new HashMap();
+objects.put("year", parameters.get(0));
+objects.put("month", parameters.get(1));
+objects.put("tag", parameters.get(2));
+return new ModelAndView("/archive.jsp", objects); [/java]

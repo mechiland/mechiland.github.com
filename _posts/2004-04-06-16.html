@@ -1,0 +1,12 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "Mozilla中XSLTProsessor的问题"
+---
+<p>果然不出我所料，在Mozilla中处理xml的转换是如此麻烦。如果在xsl头部加入了如下的一行，那么，呵呵，你惨了：</p>
+<p><font face="Courier New">xmlns="</font><a href="http://www.w3.org/TR/REC-html40"><font face="Courier New">http://www.w3.org/TR/REC-html40</font></a><font face="Courier New">"</font></p>
+<p><font face="Times New Roman">无论在下面的&lt;xsl:output&gt;元素中的method元素如何指定，<strong>永远</strong>都不可能生成正确的Html&#8212;&#8212;XSLTProsessor在每一个标签前面都加入了&lt;a0:XXX&gt;&#8230;&#8230;</font></p>
+<p>解决的办法很简单，将xmlns该成其他值，或者干脆去掉。于是一个能够工作的XSL应该如下所示：</p>
+<p>&lt;?xml version="1.0" encoding="gbk"?&gt;<br />&lt;xsl:stylesheet version="1.0" xmlns:xsl="<a href="http://www.w3.org/1999/XSL/Transform">http://www.w3.org/1999/XSL/Transform</a>"&gt;<br />&lt;xsl:output indent="yes" method="xml" encoding="GBK" omit-xml-declaration="yes"/&gt;<br />...其他部分略</p>

@@ -1,0 +1,50 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "使用buffalo作为webwork的验证机制"
+---
+昨天在开发中遇到了验证的问题，结果证明，基于异步的服务器端验证是最节省力气并且效果好的。由于2.1.7的xmlhttp验证基本不可用，2.2太丑陋，因此我决定用buffalo实现验证。思考结果是……发现事情是出奇的简单，实现起来美观又优雅。
+
+1 构造一个ValidationService(POJO), 包含一个validate方法：
+
+List validate(String namespace, String action, Map pamameters)
+
+这个方法实现很简单，只需要根据namespace和action, 构造一个ActionProxy,
+将parameters放到ActionContext中，执行Action.execute,
+然后判断这个Action是否为ValidateAware, 如果是，那么调用验证方法，将getFieldErrors中的错误按照name -
+value的方式作为返回值返回即可。
+
+2 将这个service放到buffalo-service.properties, 或者用Spring集成。这方面不赘述。
+
+3 客户端：
+
+<pre><code>var buffalo = new Buffalo("/appRoot/BUFFALO");
+var currentForm = null;
+function validate(theForm) {
+   currentForm = theForm;
+   //组装form内的信息，代码略
+   buffalo.remoteCall("validateService.validate",
+             [form.namespace, form.action, parameters],
+             callback);
+
+   return false;
+}
+
+function callback(reply) {
+   var result = reply.getResult();
+   if (result.length >0) {
+            //有错误的处理……
+   } else {
+      // 无错误就提交
+        currentForm.submit();
+   }
+}
+</code></pre>
+4 webwork中，对form.vm稍微进行修改，加上onsubmit=return validate(this) 即可
+
+完毕。
+
+由于buffalo封装了远程调用以及数据序列化的细节，使得编程更加简单并且清晰了，由于它的小巧和易于集成，使得这些工作只需要做一次，并且对开发者透明。这些代码可以自己封装，并且可以重用。我相信这个封装比webwork
+2.2的dwr要好。

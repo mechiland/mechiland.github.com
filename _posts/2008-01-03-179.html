@@ -1,0 +1,49 @@
+--- 
+layout: post
+status: publish
+type: post
+published: true
+title: "构建基于慢速网络的实时应用"
+---
+HTTP连接往往被考虑为慢速的。通常不会考虑在之上构建所谓实时应用。然而玩过网络游戏的人都知道，除了类似于CS之类实时性要求非常高的外，延迟在500毫秒以下是可以继续游戏的，而750毫秒以下也可以勉强凑合，如果放到网页中，需要用户之间实时交互的应用延迟在1秒左右完全可以接受。据我的检测，国内绝大部分ISP到用户桌面的延迟远远小于这个数字。技术催生需求，这种情况下我们可以考虑利用这些特性来做一些有趣的应用。那么在这种情形下，我们该如何编写具备实时性的客户端代码？
+
+在前面讨论的<a href="http://michael.nona.name/archives/170">双向流模拟同步HTTP连接</a>中，我提到了<a href="http://www.xmpp.org/extensions/xep-0124.html">Bidirectional-streams Over Synchronous HTTP (BOSH)</a>。然而经过验证，这种通用的设计在项目设计中并不吃香。原因之一是过于复杂，无论是服务器端还是客户端。如果有成熟的服务器端还好，否则要自行实现双通道HTTP连接的控制，这其中设计大量的低级Socket以及线程操作，相当需要技巧。在此之上，如果有更复杂的伸缩性需求，整个实现将会使梦魇。实现的复杂性同样会出现在客户端。客户端需要控制消息的拆包、封包，更高级些，能够精巧的控制Http连接（基本上是XMLHTTP的连接）个数。这些也需要相当的功底。
+
+有一种更加简单，并且容易实现的方式，经过我的实验，能够完美的应用到新的应用中，能够满足实时性的要求。基本原理就是：
+
+<strong>当上一个请求返回之前，不要发起下一个请求。一旦上一个请求返回，立即发起下一个请求。</strong>
+
+这是一个非常简单的设计。但非常有效。写成代码就是：
+
+<code>
+function forever_request() {
+new Ajax.Request('url', {onCompleted: function(response) {
+  //do your stuff
+  forever_request();
+}})
+}
+</code>
+
+这个确实很简单，但这不是构建实时应用的全部。实时意味着，大多数的用户操作需要广播到所有当前可见用户的桌面上。理想情况下，界面只是一个哑终端，只是如实的表现服务器端传递过来的消息。forever_request方法有两个作用：用来发送消息以及获取服务器响应。增强后的forever_request方法就是：
+
+<code>
+function forever_request() {
+new Ajax.Request('url', 
+  parameters: pendingMessages.pickAll().serialize();
+  {onCompleted: function(response) {
+  <strong>responseMessage(response.Text);</strong>
+  forever_request();
+}})
+}
+</code>
+
+responseMessage方法负责对从服务器端收到的消息进行展示。例如，某一次的请求中，他得到了类似于userA MOVE 3,4的消息，客户端只需要将userA移动到3,4的位置。
+
+pendingMessages负责收集所有的用户操作。为了节约网络流量，并非每一次的用户操作都将发起一次网络请求，而是将其压入到pendingMessages中。例如，在3秒内，用户说了一句话，点击了另外一个用户查看详细信息，pendingMessages中就有了类似于如下的记录：
+
+SAY 大家好啊
+GETINFO  userB
+
+在下一次请求，这些消息被发送到服务器端，用户可以得到响应。
+
+这是基本的实现了。可以看到这种实现非常简单，任何一个具备基本javascript技巧的人都可以在半天内写出实现来。然而这仍然不是全部。构建基于慢速网络的实时应用需要我们对流量、并发数非常在意。只要用户察觉不出来，尽可能少的数据，尽可能少的与服务器交互。现在带宽资源非常昂贵——共享10M与独享10M之间的价格差别可能让你咂舌。我们可以引入ConnectionManager对forever_request方法进行统筹调用，例如，当用户不怎么活跃（Idle）的时候降低更新量，尝试将更多的message pending并发送，等等。
