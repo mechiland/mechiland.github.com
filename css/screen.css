@@ -1,22 +1,5 @@
 @import url("960gs/960.css");
 
-/* http://www.levien.com/type/myfonts/inconsolata.html */
-@font-face
-{
-  font-family: "inconsolata";
-  src: url("../fonts/Inconsolata.otf");
-}
-
-@font-face
-{
-  font-family: "droid sans";
-  src: url("../fonts/DroidSans.ttf");
-}
-@font-face
-{
-  font-family: "droid sans bold";
-  src: url("../fonts/DroidSans-Bold.ttf");
-}
 body
 {
   color:#333;
@@ -46,12 +29,12 @@ h1, h2, h3, h4, h5, h6
 }
 h1, h2, h3
 {
-  font-family: "droid sans", helvetica, arial, sans-serif;
+  font-family: helvetica, arial, sans-serif;
 }
 
 h4, h5, h6
 {
-  font-family: "droid sans bold", helvetica, arial, sans-serif;
+  font-family: helvetica, arial, sans-serif;
 }
 
 h1
@@ -76,7 +59,7 @@ h5, h6{
 
 pre,code
 {
-    font-family: "inconsolata", monospace;
+    font-family: monospace;
     /* font-size: 1.142em; */
 }
 

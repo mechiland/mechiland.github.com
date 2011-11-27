@@ -1,11 +1,11 @@
 # Jekyll Configuration
 
-url: http://mechiland.github.com #XXX
+url: http://michael.nona.name #XXX
 title: Michael Chen's Blog #XXX
 description: World in my view is a word of my view #XXX
 author: Michael Chen #XXX
 email: mechiland@gmail.com #XXX
-analytics_id: UA-199699-7 #Google Analytics ID : UA-xxx-xxx  
+analytics_id: UA-199699-1 #Google Analytics ID : UA-xxx-xxx  
 
 auto: false
 lsi: false
