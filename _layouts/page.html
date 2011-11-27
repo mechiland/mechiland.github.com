@@ -3,8 +3,13 @@ layout: default
 ---
 <article>
  <section>
-    <h2>{{page.title}}</h2> 
+   <article>
+    <h2>{{page.title}}</h2>
+    <span>{{{{ post.date | date_to_string }}}}</span>
+    <div>
     {{content}}
+    </div>
+    </article>
  </section>
 </article>
 

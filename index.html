@@ -4,10 +4,11 @@ title: Home
 ---
 
 <section>
-<h1>Blog Posts</h1>
-  <ul class=posts>
-    {% for post in site.posts limit: 15 %}
-      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
-    {% endfor %}
-  </ul>
+{% for post in site.posts limit: 10 %}
+  <article class="post">
+  <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+  <span>{{ post.date | date_to_string }}</span>
+  <div>{{ post.content }}</div>
+  </article>
+{% endfor %}
 </section>

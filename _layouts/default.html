@@ -11,17 +11,19 @@
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml" />
 </head>
 <body>
-<div id="wrap" class="container_12">
-<header class="grid_12 alpha omega">
-{% if site.title %}
-  <h1><a href="{{site.url}}">{{site.title}}</a></h1>
-{% endif %}
+<header>
+  <div class="container_12">
+  {% if site.title %}
+  <h1><a href="{{site.url}}">{{site.title}}</a><span>World in my view is a word of my view</span></h1>
+  {% endif %}
+  </div>
 </header>
-<div class="clear"></div>
+<div id="wrap" class="container_12">
 <section class="grid_8 alpha omega">
 {{ content }}
 </section>
 <div class="clear"></div>
+
 <footer>
 <div class="grid_4 alpha">
   <p>
