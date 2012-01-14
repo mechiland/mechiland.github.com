@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+<meta name="author" content="Nathan Smith" />
+<meta name="copyright" content="Licensed under GPL and MIT." />
+<meta name="description" content="Adapt.js serves CSS based on screen width." />
+<title>{% if page.title %} {{ page.title }} | {% endif %} {{site.title}}</title>
+<link rel="stylesheet" href="assets/css/master.css" />
+<noscript>
+<link rel="stylesheet" href="assets/css/mobile.min.css" />
+</noscript>
+<script>
+// Edit to suit your needs.
+var ADAPT_CONFIG = {
+  // Where is your CSS?
+  path: 'assets/css/',
+
+  // false = Only run once, when page first loads.
+  // true = Change on window resize and page tilt.
+  dynamic: true,
+
+  // First range entry is the minimum.
+  // Last range entry is the maximum.
+  // Separate ranges by "to" keyword.
+  range: [
+    '0px    to 760px  = mobile.min.css',
+    '760px  to 980px  = 720.min.css',
+    '980px            = 960.min.css'
+  ]
+};
+</script>
+<script src="assets/js/adapt.min.js"></script>
+</head>
+<body>
+<div class="container_12 bg">
+  <div class="grid_12">
+    <h1>
+      {% if site.title %}
+      <a href="{{site.url}}">{{site.title}}</a><div>World in my view is a word of my view</div>
+      {% endif %}
+    </h1>
+  </div>
+  <div class="grid_7">
+    {{ content }}
+  </div>
+  <div class="grid_5 side">
+    <div>
+    <script type="text/javascript" src="http://www.douban.com/service/badge/mechiland/?show=collection&amp;n=5&amp;columns=5" ></script>
+    </div>
+  </div>
+  <hr class="grid_12">
+  <div class="grid_7">
+    IN THE MIDDLE
+  </div>
+  <hr class="grid_12" />
+  <div class="grid_4">
+    <h4>
+      BOX 1
+    </h4>
+    <p>
+      P 1
+    </p>
+  </div>
+  <div class="grid_4 push_4">
+    <h4>
+      BOX 2
+    </h4>
+    <p>
+      P2
+    </p>
+  </div>
+  <div class="grid_4 pull_4">
+    <h4>
+      BOX 3
+    </h4>
+    <p>
+      P 3
+    </p>
+  </div>
+  <hr class="grid_12" />
+  <div class="grid_3">
+    <p>
+      <small>
+        Licensed under <a href="http://www.gnu.org/licenses/gpl.html">GPL</a> and <a href="http://www.opensource.org/licenses/mit-license.php">MIT</a>.
+      </small>
+    </p>
+  </div>
+  <div class="grid_6 align_center">
+    <p>
+      <small>
+        Powered by <a href="https://github.com/nathansmith/adapt/blob/master/assets/js/adapt.js">Adapt.js</a> + <a href="http://960.gs/">960.gs</a>.
+        &nbsp;
+        |
+        &nbsp;
+        Repository at <a href="https://github.com/nathansmith/adapt">GitHub</a>.
+      </small>
+    </p>
+  </div>
+  <div class="grid_3 align_right">
+    <p>
+      <small>
+        Custom grids via <a href="http://grids.heroku.com/">SprySoft</a>.
+      </small>
+    </p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,11 +1,14 @@
 ---
-layout: default
+layout: index
 title: Home
 ---
 
 <section>
-{% for post in site.posts limit: 6 %}
-  <article class="post">
+{% for post in site.posts limit: 3 %}
+  {% assign position = '' %}
+  {% if forloop.first %} {% assign position = 'first' %} {% endif%}
+  {% if forloop.last %} {% assign position = 'last' %} {% endif%}
+  <article class="post {{position}}">
   <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
   <span>{{ post.date | date_to_string }}</span>
   <div>{{ post.content }}</div>
