@@ -145,13 +145,14 @@ article.last {
 }
 
 .side {
-  background-color: #f4f4f4;
 }
 
-.douban {
+.side_block {
   padding: 4px;  
+  background-color: #f4f4f4;
+  margin-bottom: 20px;
 }
 
-.douban table td {
+.side_block table td {
   padding: 4px;
 }
