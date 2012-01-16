@@ -2,22 +2,22 @@
 @import 'text.css';
 
 /* `Basic HTML
-----------------------------------------------------------------------------------------------------*/
+   ----------------------------------------------------------------------------------------------------*/
 
 body {
-  background: #fff;
-  color: #333;
+background: #fff;
+color: #333;
 }
 
 .bg {
-  background: #fff;
+background: #fff;
 }
 
 h1 {
-/*  background: #eee url(../images/h1.png) no-repeat right center;*/
+  /*  background: #eee url(../images/h1.png) no-repeat right center;*/
   border-bottom: 1px solid #ccc;
-  padding: 10px 90px 10px 0px;
-  text-shadow: #fff 0 1px 0;
+padding: 10px 90px 10px 0px;
+         text-shadow: #fff 0 1px 0;
 }
 
 h1 div {
@@ -27,29 +27,29 @@ h1 div {
 }
 
 h2,
-h3,
-h4,
-h5,
-h6 {
-  line-height: 1;
-}
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1;
+  }
 
 a {
-  color: #06c;
-  text-decoration: none;
+color: #06c;
+       text-decoration: none;
 }
 
 a:hover {
-  color: #c60;
-  text-decoration: underline;
-}
+color: #c60;
+       text-decoration: underline;
+  }
 
 small {
   font-size: 11px;
 }
 
 /* `Misc Classes
-----------------------------------------------------------------------------------------------------*/
+   ----------------------------------------------------------------------------------------------------*/
 
 .align_center {
   text-align: center;
@@ -60,43 +60,43 @@ small {
 }
 
 /* `Data Table
-----------------------------------------------------------------------------------------------------*/
+   ----------------------------------------------------------------------------------------------------*/
 
 .data,
-.data th,
-.data td {
-  border-style: solid;
-  border-color: #ddd;
-}
+  .data th,
+  .data td {
+    border-style: solid;
+    border-color: #ddd;
+  }
 
 .data {
   border-width: 0 1px 1px;
-  width: 100%;
+width: 100%;
 }
 
 .data caption {
-  padding: 0 10px 5px;
-  text-transform: uppercase;
+padding: 0 10px 5px;
+         text-transform: uppercase;
 }
 
 .data th,
-.data td {
-  border-top-width: 1px;
-  padding: 5px 10px;
-}
+  .data td {
+    border-top-width: 1px;
+padding: 5px 10px;
+  }
 
 .data th {
   white-space: nowrap;
 }
 
 .data thead th {
-  background: #eee;
-  font-weight: bold;
-  text-shadow: #fff 0 1px 0;
+background: #eee;
+            font-weight: bold;
+            text-shadow: #fff 0 1px 0;
 }
 
 .data tbody th {
-  width: 1px;
+width: 1px;
 }
 
 .data tr th:first-child {
@@ -104,40 +104,40 @@ small {
 }
 
 /* `Code
-----------------------------------------------------------------------------------------------------*/
+   ----------------------------------------------------------------------------------------------------*/
 
 pre,
-code {
-  font-size: 12px;
-  font-family: Menlo, Courier, monospace;
-}
+  code {
+    font-size: 12px;
+    font-family: Menlo, Courier, monospace;
+  }
 
 pre,
-.notice {
-  background: #ffe;
-  border: 1px solid;
-  border-color: #eed #ccb #bba #ddc;
-  overflow: auto;
-  padding: 10px 0 10px 10px;
-}
+  .notice {
+background: #ffe;
+border: 1px solid;
+        border-color: #eed #ccb #bba #ddc;
+overflow: auto;
+padding: 10px 0 10px 10px;
+  }
 
 * html pre {
-  overflow: hidden;
-  width: 97%;
+overflow: hidden;
+width: 97%;
 }
 
 code {
-  background: #ff9;
-  padding: 0 2px;
+background: #ff9;
+padding: 0 2px;
 }
 
 article {
-  padding: 30px 0px;
-  border-bottom: 1px dashed #ccc;
+padding: 30px 0px;
+         border-bottom: 1px dashed #ccc;
 }
 
 article.first {
-  padding: 0px 0px 30px 0px;
+padding: 0px 0px 30px 0px;
 }
 
 article.last {
@@ -146,4 +146,12 @@ article.last {
 
 .side {
   background-color: #f4f4f4;
+}
+
+.douban {
+  padding: 4px;  
+}
+
+.douban table td {
+  padding: 4px;
 }

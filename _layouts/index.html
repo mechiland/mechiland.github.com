@@ -47,10 +47,20 @@ var ADAPT_CONFIG = {
     {{ content }}
   </div>
   <div class="grid_5 side">
-    <div>
+   <div class="douban">
+    <h4>读听看</h4>
     <script type="text/javascript" src="http://www.douban.com/service/badge/mechiland/?show=collection&amp;n=5&amp;columns=5" ></script>
     </div>
+    <div class="douban">
+      <h4>最近文章</h4>
+    <ul>  
+  {% for post in site.posts limit: 10 %}
+    <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+{% endfor %}
+</section>
+    </div> 
   </div>
+<!--
   <hr class="grid_12">
   <div class="grid_7">
     IN THE MIDDLE
@@ -80,29 +90,26 @@ var ADAPT_CONFIG = {
       P 3
     </p>
   </div>
+-->
   <hr class="grid_12" />
   <div class="grid_3">
     <p>
       <small>
-        Licensed under <a href="http://www.gnu.org/licenses/gpl.html">GPL</a> and <a href="http://www.opensource.org/licenses/mit-license.php">MIT</a>.
+       All right reserved.
       </small>
     </p>
   </div>
   <div class="grid_6 align_center">
     <p>
       <small>
-        Powered by <a href="https://github.com/nathansmith/adapt/blob/master/assets/js/adapt.js">Adapt.js</a> + <a href="http://960.gs/">960.gs</a>.
-        &nbsp;
-        |
-        &nbsp;
-        Repository at <a href="https://github.com/nathansmith/adapt">GitHub</a>.
+        Powered by Github
       </small>
     </p>
   </div>
   <div class="grid_3 align_right">
     <p>
       <small>
-        Custom grids via <a href="http://grids.heroku.com/">SprySoft</a>.
+        2012 we still alive.
       </small>
     </p>
   </div>
