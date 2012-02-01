@@ -6,12 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
 <meta name="author" content="Michael Chen" />
 <meta name="description" content="Michael Chen's Blog: world in my view is a word of my view" />
+<meta property="og:title" content="Michael Chen's Blog" />
+<meta property="og:description" content="Blog from Michael Chen" /> 
 <title>{% if page.title %} {{ page.title }} | {% endif %} {{site.title}}</title>
 <link rel="stylesheet" href="/css/master.css" />
 <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Michael Chen's Blog Feed" />
 <noscript>
 <link rel="stylesheet" href="/css/mobile.min.css" />
 </noscript>
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f2576ae77545e13"></script>
 <script>
 // Edit to suit your needs.
 var ADAPT_CONFIG = {
@@ -57,7 +60,6 @@ var ADAPT_CONFIG = {
   {% for post in site.posts limit: 10 %}
     <li><a href="{{ post.url }}">{{ post.title }}</a></li>
 {% endfor %}
-</section>
     </div> 
   </div>
 <!--
