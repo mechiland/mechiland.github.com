@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+<meta name="author" content="Michael Chen" />
+<meta name="description" content="Michael Chen's Blog: world in my view is a word of my view" />
+{% if single_post %}
+<meta property="og:title" content="{{ page.title }} | {{ site.title }}" />
+<meta property="og:description" content="{{ page.content | strip_html | truncate:50}}" />
+{% else %}
+<meta property="og:title" content="Michael Chen's Blog" />
+<meta property="og:description" content="Michael Chen's Blog: world in my view is a word of my view" />
+{% endif %}
+<title>{% if page.title %} {{ page.title }} | {% endif %} {{site.title}}</title>
+<link rel="stylesheet" href="/css/master.css" />
+<link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Michael Chen's Blog Feed" />
+<noscript>
+<link rel="stylesheet" href="/css/mobile.min.css" />
+</noscript>
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f2576ae77545e13"></script>
+<script>
+var ADAPT_CONFIG = {
+  path: '/css/',
+  dynamic: true,
+  range: [
+    '0px    to 760px  = mobile.min.css',
+    '760px  to 980px  = 720.min.css',
+    '980px            = 960.min.css'
+  ]
+};
+</script>
+<script src="/js/adapt.min.js"></script>
+</head>
+<body>
+<div class="container_12 bg">
+  <div class="grid_12">
+    <h1>
+      {% if site.title %}
+      <a href="{{site.url}}">{{site.title}}</a><div>World in my view is a word of my view</div>
+      {% endif %}
+    </h1>
+  </div>
+ 

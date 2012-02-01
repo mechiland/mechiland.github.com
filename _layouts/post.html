@@ -1,12 +1,12 @@
----
-layout: index
----
-<article>
- <section>
-    <article>
+{% assign single_post = true %}
+{% include header.html %}
+
+  <div class="grid_7">
+    
+    <article class="single">
       <h2>{{page.title}}</h2>
  <span>{{ page.date | date_to_string}}</span>
-  <div>
+  <div class="addthis_share">
 <!-- AddThis Button BEGIN -->
 <div class="addthis_toolbox addthis_default_style " 
   addthis:title="{{site.title}}: {{page.title}}"
@@ -20,21 +20,18 @@ layout: index
 </div>
 <!-- AddThis Button END -->
   </div>
-
       <div>
       {{content}}
       </div>
       </article>
- </section>
-</article>
-
-{% if site.lsi %}    
-<section id="related">
-  <h2>Related Posts</h2>
-  <ul class="posts">
-    {% for post in site.related_posts limit:3 %}
-      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
-    {% endfor %}
-  </ul>
-  </section>
-{% endif %}
+  </div>
+  <div class="grid_5 side">
+   <div class="side_block">
+      <h4>最近文章</h4>
+    <ul>  
+  {% for post in site.posts limit: 10 %}
+    <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+{% endfor %}
+    </div> 
+  </div>
+{% include footer.html %}
