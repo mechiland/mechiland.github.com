@@ -12,3 +12,14 @@ namespace :gs960 do
   end
 end
 
+
+require 'time'
+
+desc "Create a new post based on current date"
+task :new_post do
+  print "post-title: "
+  title = STDIN.gets.strip
+  file = Time.new.strftime("%Y-%m-%d-#{title}.md")
+  sh "cp _includes/template.md _posts/#{file}"
+end
+

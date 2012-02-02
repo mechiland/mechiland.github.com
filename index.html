@@ -9,12 +9,12 @@ title: Home
   {% if forloop.first %} {% assign position = 'first' %} {% endif%}
   {% if forloop.last %} {% assign position = 'last' %} {% endif%}
   <article class="post {{position}}">
-  <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+  <h2><a href="{{ post.url }}/">{{ post.title }}</a></h2>
   <span>{{ post.date | date_to_string }}</span>
   <div class="addthis_share">
 <!-- AddThis Button BEGIN -->
 <div class="addthis_toolbox addthis_default_style " 
-  addthis:url="{{site.url}}{{post.url}}" 
+  addthis:url="{{site.url}}{{post.url}}/" 
   addthis:title="{{site.title}}: {{post.title}}"
 >
 <a class="addthis_button_preferred_1"></a>
