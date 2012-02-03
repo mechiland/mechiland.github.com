@@ -165,14 +165,11 @@ padding: 4px;
   margin-bottom: 20px;
 }
 
-.archive_year {
-  width: 30%;
-  float: left;
+.archives .grid_4 {
   border-top: 4px solid #ddd;
-  margin-right: 20px;
 }
 
-.archive_year h3 {
+.archives h3 {
   padding: 10px 0px;
   margin-bottom: 0px;
 }

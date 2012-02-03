@@ -3,11 +3,11 @@ layout: all
 title: 所有Blog
 ---
 
-<h2>所有文章</h2>
+<div class="grid_12"><h2>所有文章</h2></div>
 <div class="archives">
   {% for post in site.posts %}
     {% unless post.next %}
-      <div class="archive_year">
+      <div class="grid_4">
       <h3>{{ post.date | date: '%Y' }}</h3>
       <ul>
     {% else %}
@@ -15,7 +15,7 @@ title: 所有Blog
       {% capture nyear %}{{ post.next.date | date: '%Y' }}{% endcapture %}
       {% if year != nyear %}
         </ul></div>
-        <div class="archive_year">
+        <div class="grid_4">
         <h3>{{ post.date | date: '%Y' }}</h3>
         <ul>
       {% endif %}
