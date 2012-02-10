@@ -36,7 +36,9 @@ h3 {
 }
 
 h4 {
+  border-bottom: 2px dotted #CCCCCC;
   font-size: 19px;
+  padding-bottom: 4px;
 }
 
 h5 {
