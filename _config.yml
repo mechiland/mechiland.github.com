@@ -11,7 +11,7 @@ auto: false
 lsi: false
 pygments: false
 server_port: 4000
-markdown: maruku
+markdown: rdiscount
 permalink: /archives/:title
 
 maruku:
