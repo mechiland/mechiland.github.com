@@ -9,8 +9,9 @@
 ----------------------------------------------------------------------------------------------------*/
 
 body {
-  font: 14px Lucida Sans Unicode,Myriad Pro,Hiragino Sans GB,Heiti SC,"微软雅黑",Verdana,Helvetica,sans-serif,SimHei,"黑体"
-  line-height: 160%;
+  font: 14px/1.5 "Lucida Sans Unicode",'Heiti SC','微软雅黑',Verdana,'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
+  /*font: 14px 'Lucida Sans Unicode','Heiti SC',"微软雅黑",Verdana,Helvetica,sans-serif,SimHei,"黑体"*/
+  line-height: 150%;
 }
 
 hr {
