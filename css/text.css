@@ -9,8 +9,8 @@
 ----------------------------------------------------------------------------------------------------*/
 
 body {
-  font: 14px/1.5 "Trebuchet MS",Trebuchet,'Helvetica Neue', Arial, 'Liberation Sans', FreeSans, sans-serif;
-  line-height: 150%;
+  font: 14px Lucida Sans Unicode,Myriad Pro,Hiragino Sans GB,Heiti SC,"微软雅黑",Verdana,Helvetica,sans-serif,SimHei,"黑体"
+  line-height: 160%;
 }
 
 hr {
