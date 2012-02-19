@@ -18,7 +18,7 @@ title: "为什么BaseCamp Next如此之快？"
 
 * 令人头痛的缓存更新策略问题，则通过ActiveRecord#cache_key作为缓存主键解决。不得不说，这个方法的确很巧妙。在大多数缓存场景里，cache key是稀缺资源，往往指定了一个cache key之后，剩下的事情就是考虑如果更新它的内容。换句话说，key是不变的，content不断的变化。而在Basecamp Next新的设计中，刚好反过来，key是临时的。。。content是固定的。一旦一个ActiveRecord对象发生变化，那么key也发生变化，页面直接使用新的key，旧的key被无情抛弃，利用memcached的LRU能力，自动删除旧的内容。实现非常简单，ActiveRecord#cache_key早就有了，memcached LRU工作得很健壮。（[具体请看这里](http://37signals.com/svn/posts/3113-how-key-based-cache-expiration-works)）
 
-* 前端其实没什么。有了这么变态的后台，像Basecamp这种读操作大于写操作的应用，前台即便什么都不做，都会快的惊人。但前端还是有两点的。[pjax](https://github.com/defunkt/jquery-pjax) ，其实本质是[HTML5 pushState](http://diveintohtml5.info/history.html)技术的使用，让前台界面只需要加载一次模板、数目众多的Javascript和CSS。现在JQuery的[on](http://api.jquery.com/on/)操作也很强大，能够在元素还没有创建的时候挂接事件，这样每次服务器往返的开销降到了最低。在我自己的试验Rails应用中，采用[pjax-rails](http://rubygems.org/gems/pjax-rails)插件，那链接跳转速度，快得让你不敢相信。貌似37Signals[自己编写了一个框架Stacker](http://37signals.com/svn/posts/3112-how-basecamp-next-got-to-be-so-damn-fast-without-using-much-client-side-ui)，估计能够更高级的处理pjax带来的其他问题，特别是联动状态的处理。
+* 前端其实没什么。有了这么变态的后台，像Basecamp这种读操作大于写操作的应用，前台即便什么都不做，都会快的惊人。但前端还是有亮点。[pjax](https://github.com/defunkt/jquery-pjax) ，其实本质是[HTML5 pushState](http://diveintohtml5.info/history.html)技术的使用，让前台界面只需要加载一次模板、数目众多的Javascript和CSS。现在JQuery的[on](http://api.jquery.com/on/)操作也很强大，能够在元素还没有创建的时候挂接事件，这样每次服务器往返的开销降到了最低。在我自己的试验Rails应用中，采用[pjax-rails](http://rubygems.org/gems/pjax-rails)插件，那链接跳转速度，快得让你不敢相信。貌似37Signals[自己编写了一个框架Stacker](http://37signals.com/svn/posts/3112-how-basecamp-next-got-to-be-so-damn-fast-without-using-much-client-side-ui)，估计能够更高级的处理pjax带来的其他问题，特别是联动状态的处理。
 
 最令人佩服的是——实现这些看起来很酷的结果都是采用已知的技术，没有什么火箭科技，也没有什么取巧的黑客手法。现在的考验就来自于真实的产品环境，在更多的用户情况下是否会出现其他未知的问题。
 
