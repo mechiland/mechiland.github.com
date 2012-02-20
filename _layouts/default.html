@@ -17,7 +17,7 @@
     <div class="side_block">
       <h4>最近文章</h4>
     <ul>  
-  {% for post in site.posts limit: 10 %}
+  {% for post in site.posts limit: 15 %}
     <li><a href="{{ post.url }}">{{ post.title }}</a></li>
 {% endfor %}
     </div> 
