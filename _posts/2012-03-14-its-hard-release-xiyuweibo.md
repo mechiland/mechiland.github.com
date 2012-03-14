@@ -25,4 +25,4 @@ title: "没那么简单：写在细语微博发布之后"
 * 添加@我的评论（这个是新浪API的设计，评论和状态居然不是同一种DomainModel）
 * 关注/取消关注/查看好友/搜索等等
 
-既然要免费，就更彻底些好了。[细语微博](http://michael.nona.name/xiyuweibo/)的源代码全部开源，包括[fork后的MacGap](https://github.com/mechiland/macgap)和[HTML5/CoffeeScript程序](https://github.com/mechiland/xiyuweibo/)。得益于BackboneJS, 前端数据解耦和利用事件隔离，让扩展新功能还是挺容易的。
+既然要免费，就更彻底些好了。[细语微博](http://michael.nona.name/xiyuweibo/)的源代码全部开源，包括[fork后的MacGap](https://github.com/mechiland/macgap)和[HTML5/CoffeeScript程序](https://github.com/mechiland/xiyuweibo/)。GitHub嘛，你是知道的，fork, 然后你如果愿意的话，给我一个pull request。
