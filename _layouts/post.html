@@ -47,6 +47,20 @@
   {% for post in site.posts limit: 15  %}
     <li><a href="{{ post.url }}">{{ post.title }}</a></li>
 {% endfor %}
+    </div>
+    <div>
+      <div id="cse" style="width: 100%;">Loading</div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'zh-CN', style : google.loader.themes.V2_DEFAULT});
+  google.setOnLoadCallback(function() {
+    var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+      '014265145281448332743:ehpow5xzdu4', customSearchOptions);
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    customSearchControl.draw('cse');
+  }, true);
+</script>
+
     </div> 
   </div>
 {% include footer.html %}
