@@ -173,3 +173,13 @@ padding: 10px;
   padding: 10px 0px;
   margin-bottom: 0px;
 }
+
+blockquote {
+  background-color: #f7f7f7;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+blockquote p {
+  margin-bottom: 0px;
+}
