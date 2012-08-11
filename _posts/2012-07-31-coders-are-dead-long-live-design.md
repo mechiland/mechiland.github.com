@@ -3,7 +3,7 @@ layout: post
 status: publish
 type: post
 published: true
-title: "码农已死，设计永生"
+title: "码农从设计重生"
 ---
 
 很遗憾，软件蓝领那一天似乎没有到来过；从未来的迹象看来，也不太可能产生了。不但如此，那些本来可能让蓝领去做的工作，莫名其妙间产生了许多的编程框架，让你几小时内就能完成过去好几天才能完成的工作。比如基于jQuery Mobile的[codiqa](http://www.codiqa.com/)，随便在页面上拖拖拽拽一个不太难看的、兼容iOS设备/Android等超过70中终端的手机html5程序就出来了；还有一些更过分的，几分钟就能把你的web程序打包，直接生成最终的apk或者ipa上传到对应的市场。
