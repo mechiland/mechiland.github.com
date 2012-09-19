@@ -36,6 +36,6 @@ title: "程序员的思维训练实践"
 
 13. __个性__ 不断修炼以上部分，寻找自己独一无二的优势，扬长避短，让自己变得与众不同。
 
-这14条应该是[我如何学习](http://localhost:4000/archives/how-i-learn-final/)序列的补充。
+这14条应该是[我如何学习](/archives/how-i-learn-final/)序列的补充。
 
 
