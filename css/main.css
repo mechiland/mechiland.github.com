@@ -104,7 +104,7 @@ body {
 }
 
 aside {
-    background: url(/img/sunbridge.jpg);
+    background: url(/img/trees.jpg);
     background-size: cover;
     display:block;
     border-right:1px solid #666;
@@ -149,12 +149,9 @@ nav a.active, nav a:hover {
     border-bottom: 1px solid #000;
 }
 
-.container {
-    overflow: hidden;
-}
 
 .content_wrapper {
-    padding-top: 60px;    
+    padding-top: 60px;  
 }
 
 .blogs article h2 {
@@ -195,6 +192,7 @@ nav a.active, nav a:hover {
 @media (max-width: 1000px) {
     aside {        
         height: 400px;
+        overflow: hidden;  
     }
     .aside-inner {
         padding-top: 280px;
@@ -230,6 +228,7 @@ nav a.active, nav a:hover {
         width: 58%;
         margin-left: 36%;
         max-width: 640px;
+        overflow: hidden;  
     }
     .blogs article .meta {
         font-size: 16px;
