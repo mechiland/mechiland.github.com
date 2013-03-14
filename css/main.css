@@ -190,11 +190,11 @@ nav a.active, nav a:hover {
 
 .archives {
     line-height: 1.6;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .archives h3 {
-    font-size: 20px;
+    font-size: 24px;
 }
 
 .archives a {
@@ -242,6 +242,14 @@ nav a.active, nav a:hover {
     }
     .blogs article .meta {
         font-size: 12px;    
+    }
+    .archives {
+        line-height: 1.6;
+        font-size: 16px;
+    }
+
+    .archives h3 {
+        font-size: 20px;
     }
 
 }
