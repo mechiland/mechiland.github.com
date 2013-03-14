@@ -182,13 +182,13 @@ nav a.active, nav a:hover {
 .blogs article .summary a:hover {
     color: #000;
 }
-
+li { list-style: none;}
 .blogs article .meta {
     color: #999;
     margin-bottom: 12px;
 }
 
-.archives {
+.archives, .about {
     line-height: 1.6;
     font-size: 18px;
 }
@@ -197,9 +197,9 @@ nav a.active, nav a:hover {
     font-size: 24px;
 }
 
-.archives a {
-    color: #333;
-    text-decoration: none;
+.archives a, .about a {
+    color: #007C05;
+    text-decoration: underline;
 }
 .archives li {
     list-style: none;
@@ -243,7 +243,7 @@ nav a.active, nav a:hover {
     .blogs article .meta {
         font-size: 12px;    
     }
-    .archives {
+    .archives, .about {
         line-height: 1.6;
         font-size: 16px;
     }
