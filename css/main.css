@@ -188,6 +188,39 @@ nav a.active, nav a:hover {
     margin-bottom: 12px;
 }
 
+.archives {
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.archives h3 {
+    font-size: 20px;
+}
+
+.archives a {
+    color: #333;
+    text-decoration: none;
+}
+.archives li {
+    list-style: none;
+}
+.archives .year {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+}
+
+.archives a:hover {
+    text-decoration: underline;
+}
+.archives .postdate {
+    font-size: 12px;
+    color: #999;
+    display: inline-block;
+    width: 60px;
+
+}
+
 
 @media (max-width: 1000px) {
     aside {        
