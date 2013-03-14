@@ -1,21 +1,17 @@
 ---
-layout: index
+layout: new_index
 title: Home
 ---
 
-<section>
-{% for post in site.posts limit: 3 %}
+<div class="blogs">
+{% for post in site.posts limit: 7 %}
   {% assign position = '' %}
   {% if forloop.first %} {% assign position = 'first' %} {% endif%}
   {% if forloop.last %} {% assign position = 'last' %} {% endif%}
   <article class="post {{position}}">
   <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-  <span>{{ post.date | date_to_string }}</span>
-  <div class="addthis_share">
-<div class="bshare-custom"><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到豆瓣" class="bshare-douban"></a><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到人人网" class="bshare-renren"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a></div>
-  </div>
-  <div>{{ post.content }} 
-</div>
+  <div class="meta">{{ post.date | date_to_string }}</div>
+  <div class="summary">{{ post.content | truncateline: 120}}</a></div>
   </article>
 {% endfor %}
-</section>
+</div>
