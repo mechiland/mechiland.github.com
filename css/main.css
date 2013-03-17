@@ -223,8 +223,8 @@ li { list-style: none;}
 }
 .single_wrapper {
     margin: 0 auto;
-    max-width: 640px;
-    margin-top: 100px;
+    max-width: 600px;
+    margin-top: 80px;
 }
 
 .single article h2 {
@@ -240,6 +240,22 @@ li { list-style: none;}
     font-size: 18px;
     line-height: 1.6;
 }
+
+.single article .content p {
+    margin: 1.5em 0px;
+}
+
+.single article .content blockquote {
+    border-left: 4px solid green;
+    margin: 0px 10px 0px 0px;
+    padding-left: 20px;
+    font-family: Georgia,STKaiti,KaiTi,KaiTi_GB2312;
+}
+
+.single article .content li {
+    list-style: square;
+}
+
 .single .author {
     border-top: 4px solid #eee;
     border-bottom: 4px solid #eee;
