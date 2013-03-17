@@ -160,6 +160,7 @@ nav a.active, nav a:hover {
 }
 
 .blogs article h2 a {
+    display: block;
     color: #333;
     text-decoration: none;
 }
@@ -197,7 +198,7 @@ li { list-style: none;}
     font-size: 24px;
 }
 
-.archives a, .about a {
+.archives a, .about a, .single a {
     color: #007C05;
     text-decoration: underline;
 }
@@ -220,7 +221,59 @@ li { list-style: none;}
     width: 60px;
 
 }
+.single_wrapper {
+    margin: 0 auto;
+    max-width: 640px;
+    margin-top: 100px;
+}
 
+.single article h2 {
+    font-size: 36px;
+}
+
+.single article .meta {
+    color: #999;
+    font-size: 14px;
+}
+
+.single article .content {
+    font-size: 18px;
+    line-height: 1.6;
+}
+.single .author {
+    border-top: 4px solid #eee;
+    border-bottom: 4px solid #eee;
+    margin: 30px 0px;
+    padding: 10px;
+    text-align: center;
+    color: green;
+}
+
+.single .comments {
+    border-top: 4px solid #eee;
+    padding-top: 30px;
+    margin-top: 40px;
+}
+
+.home {
+    position: fixed;
+    background-color: #666;
+    color: #fff;    
+    left: 20px;
+    top: 20px;
+    font-size: 14px;
+}
+
+.home a {
+    display: block;
+    padding: 15px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.home a:hover {
+    background-color: #222;
+}
 
 @media (max-width: 1000px) {
     aside {        
@@ -252,6 +305,13 @@ li { list-style: none;}
         font-size: 20px;
     }
 
+    .single_wrapper {
+        width: 80%;
+    }
+    .home {
+        position: absolute;
+    }
+
 }
 
 @media (min-width: 1001px) {
@@ -277,6 +337,10 @@ li { list-style: none;}
     
     .blogs article .summary {
         font-size: 18px;
+    }
+
+    .home {
+        position: fixed;
     }
 
 }

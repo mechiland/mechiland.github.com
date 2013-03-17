@@ -1,19 +1,20 @@
 {% assign single_post = true %}
-{% include header.html %}
+{% include new_header.html %}
 
-  <div class="grid_7">
-    
-    <article class="single">
-      <h2>{{page.title}}</h2>
- <span>{{ page.date | date_to_string}}</span>
-  <div class="addthis_share">
-<div class="bshare-custom"><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到豆瓣" class="bshare-douban"></a><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到人人网" class="bshare-renren"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a></div>
-  </div>
-      <div>
-      {{content}}
-      </div>
-      </article>
-<div id="disqus_thread"></div>
+<div class="home"><a href="/">首页</a></div>
+<div class="single_wrapper">
+	<div class="single">
+	    
+	    <article>
+	      <h2>{{page.title}}</h2>
+	     <div class="meta">{{ page.date | date_to_string}}</div>
+	      <div class="content">
+	      {{content}}
+	      </div>
+	    </article>
+
+		<div class="comments">
+			<div id="disqus_thread"></div>
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
     var disqus_shortname = 'michaelchensblog'; // required: replace example with your forum shortname
@@ -27,29 +28,11 @@
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+		</div>		
 
-  </div>
-  <div class="grid_5 side">
-   <div class="side_block">
-      <h4>最近文章</h4>
-    <ul>  
-  {% for post in site.posts limit: 15  %}
-    <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-{% endfor %}
-    </div>
-    <div>
-      <div id="cse" style="width: 100%;">Loading</div>
-<script src="http://www.google.com/jsapi" type="text/javascript"></script>
-<script type="text/javascript"> 
-  google.load('search', '1', {language : 'zh-CN', style : google.loader.themes.V2_DEFAULT});
-  google.setOnLoadCallback(function() {
-    var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
-      '014265145281448332743:ehpow5xzdu4', customSearchOptions);
-    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
-    customSearchControl.draw('cse');
-  }, true);
-</script>
-
-    </div> 
-  </div>
-{% include footer.html %}
+	</div>	
+</div>
+<section class="single_footer">
+	
+</section>
+{% include new_footer.html %}
