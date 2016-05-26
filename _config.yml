@@ -7,10 +7,8 @@ author: Michael Chen #XXX
 email: mechiland@gmail.com #XXX
 analytics_id: UA-199699-1 #Google Analytics ID : UA-xxx-xxx  
 
-auto: false
 lsi: false
-pygments: false
-server_port: 4000
+port: 4000
 markdown: rdiscount
 permalink: /archives/:title
 
