@@ -4,14 +4,11 @@ title: Home
 ---
 
 <div class="blogs">
-{% for post in site.posts limit: 10 %}
-  {% assign position = '' %}
-  {% if forloop.first %} {% assign position = 'first' %} {% endif%}
-  {% if forloop.last %} {% assign position = 'last' %} {% endif%}
-  <article class="post {{position}}">
-  <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-  <div class="meta">{{ post.date | date_to_string }}</div>
-  <div class="summary">{{ post.content | raw | truncate: 300}}</a></div>
-  </article>
-{% endfor %}
+  <ul>
+  {% for post in site.posts %}  
+  <li>
+    <a href="{{ post.url }}">{{ post.title }}</a>
+  </li>
+  {% endfor %}
+</ul>
 </div>
