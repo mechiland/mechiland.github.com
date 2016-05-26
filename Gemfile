@@ -1,4 +1,4 @@
 source 'http://gems.ruby-china.org/'
 
-gem 'rdiscount'
+gem 'kramdown'
 gem 'jekyll', "3.1.6"

@@ -9,11 +9,7 @@ analytics_id: UA-199699-1 #Google Analytics ID : UA-xxx-xxx
 
 lsi: false
 port: 4000
-markdown: rdiscount
-permalink: /archives/:title
-
-maruku:
-  use_tex: false
-  use_divs: false
-  png_dir: img/tex
-  png_url: /img/tex
+markdown: kramdown
+permalink: /:title
+kramdown:
+   input: GFM

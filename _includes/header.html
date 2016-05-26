@@ -1,58 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta http-equiv="x-ua-compatible" content="ie=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
-<meta name="author" content="Michael Chen" />
-<meta name="description" content="Michael Chen's Blog: world in my view is a word of my view" />
-{% if single_post %}
-<meta property="og:title" content="{{ page.title }} | {{ site.title }}" />
-<meta property="og:description" content="{{ page.content | strip_html | truncate:50}}" />
-{% else %}
-<meta property="og:title" content="Michael Chen's Blog" />
-<meta property="og:description" content="Michael Chen's Blog: world in my view is a word of my view" />
-{% endif %}
-<title>{% if page.title %} {{ page.title }} | {% endif %} {{site.title}}</title>
-<link rel="stylesheet" href="/css/master.css" />
-<link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Michael Chen's Blog Atom Feed" />
-<link href="/feed/" type="application/rss+xml" rel="alternate" title="Michael Chen's Blog RSS Feed" />
-<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=f3d44ef3-5202-49aa-80ed-8b2a206d792f&amp;pophcol=2&amp;lang=zh"></script>
-<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
-<noscript>
-<link rel="stylesheet" href="/css/mobile.min.css" />
-</noscript>
-<script>
-var ADAPT_CONFIG = {
-  path: '/css/',
-  dynamic: true,
-  range: [
-    '0px    to 760px  = mobile.min.css',
-    '760px  to 980px  = 720.min.css',
-    '980px            = 960.min.css'
-  ]
-};
-</script>
-<script src="/js/adapt.min.js"></script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-199699-1']);
-  _gaq.push(['_trackPageview']);
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <meta name="author" content="Michael Chen" />
+        {% if single_post %}
+        <meta property="og:title" content="{{ page.title }} | {{ site.title }}" />
+        <meta property="og:description" content="{{ page.content | strip_html | truncate:50}}" />
+        {% else %}
+        <meta property="og:title" content="Michael Chen's Blog" />
+        <meta property="og:description" content="Michael Chen's Blog: world in my view is a word of my view" />
+        {% endif %}
+        <title>{% if page.title %} {{ page.title }} | {% endif %} {{site.title}}</title>
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-</head>
-<body>
-<div class="container_12 bg">
-  <div class="grid_12">
-    <h1>
-      {% if site.title %}
-      <a href="{{site.url}}">{{site.title}}</a><div>World in my view is a word of my view</div>
-      {% endif %}
-    </h1>
-  </div>
- 
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="icon" type="image/png" href="/favicon.png">
+    </head>
+    <body>
+      <div class="container">
+        <h1>Michael Chen</h1>
+        <p>World in my view is a word of my view.</p>                
+      </div>

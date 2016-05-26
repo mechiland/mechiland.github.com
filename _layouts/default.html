@@ -1,28 +1,7 @@
 {% include header.html %}
-  <div class="grid_12">
-    <h1>
-      {% if site.title %}
-      <a href="{{site.url}}">{{site.title}}</a><div>World in my view is a word of my view</div>
-      {% endif %}
-    </h1>
-  </div>
-  <div class="grid_7">
-    {{ content }}
-  </div>
-  <div class="grid_5 side">
-   <div class="side_block">
-    <h4>读听看</h4>
-    <script type="text/javascript" src="http://www.douban.com/service/badge/mechiland/?show=collection&amp;n=8&amp;columns=4" ></script>
-    </div>
-    <div class="side_block">
-      <a href="http://michael.nona.name/xiyuweibo/">细语微博, 新浪微博Mac客户端</a>
-    </div>
-    <div class="side_block">
-      <h4>最近文章</h4>
-    <ul>  
-  {% for post in site.posts limit: 15 %}
-    <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-{% endfor %}
-    </div> 
-  </div>
+
+<div class="container">
+  {{ content }}
+</div>
+
 {% include footer.html %}
