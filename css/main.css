@@ -6,13 +6,17 @@ textarea {
     color: #222;
 }
 
+html {
+  font-size: 14px;
+}
+
 body {
     font-size: 1em;
     line-height: 1.5;
 }
 
 html, body {
-    margin: 0px 10px 40px 10px;
+    margin: 0px 10px 20px 10px;
     padding: 0px;
 }
 
@@ -27,4 +31,26 @@ body {
   margin: auto;
 }
 
-.meta { color: #666;}
+.blogs ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.brand a {
+  color: #222;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+hr {
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+.single {
+  padding-bottom: 60px;
+  border-bottom: 1px solid #666;
+/*  margin-bottom: 20px;*/
+}
+.meta { color: #666; font-style: italic; font-size: 12px;}
