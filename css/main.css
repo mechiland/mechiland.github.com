@@ -54,3 +54,10 @@ hr {
 /*  margin-bottom: 20px;*/
 }
 .meta { color: #666; font-style: italic; font-size: 12px;}
+
+blockquote {
+  font-family: Kaiti SC;
+  border-left: 2px solid #ccc;
+  padding-left: 10px;
+  margin-left: 0px;
+}
