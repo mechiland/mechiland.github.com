@@ -10,11 +10,6 @@ html {
   font-size: 14px;
 }
 
-body {
-    font-size: 1em;
-    line-height: 1.5;
-}
-
 html, body {
     margin: 0px 10px 20px 10px;
     padding: 0px;
@@ -23,7 +18,17 @@ html, body {
 body {
     height: 100%;
     font-family: 'Pingfang SC','微软雅黑',Verdana,'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
-    font-weight: 300;
+    font-size: 1em;
+    background-color: #fffff8;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+}
+
+a {
+  color: #111;
+  text-decoration: underline;
 }
 
 .container {
