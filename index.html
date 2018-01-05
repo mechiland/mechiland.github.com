@@ -8,7 +8,7 @@ title: Home
   {% for post in site.posts %}  
   {% if post.type == 'post' %}
   <li>
-    <a href="{{ post.url }}">{{ post.title }}</a>
+    <a href="{{ post.url }}">{{ post.title }}</a> {{ page.date }}
   </li>
   {% endif %}
   {% endfor %}
