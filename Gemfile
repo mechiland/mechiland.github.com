@@ -1,4 +1,4 @@
-source 'http://gems.ruby-china.org/'
+source 'https://rubygems.org'
 
 gem 'kramdown'
-gem 'jekyll', "3.1.6"
+gem 'jekyll'
