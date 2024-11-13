@@ -1,3 +1,0 @@
-# Michael Chen's Blog 
-
-
